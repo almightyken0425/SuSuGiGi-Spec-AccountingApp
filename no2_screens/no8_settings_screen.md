@@ -10,7 +10,7 @@
 
 ```text
 +--------------------------------+
-| < Back      Settings           |
+| <           Settings           |
 +--------------------------------+
 | Data Management                |
 |  [Icon] Categories             |
@@ -31,6 +31,7 @@
 
 ### 導覽列
 
+- Header 模式: A
 - 返回按鈕
 - 設定 標題
 

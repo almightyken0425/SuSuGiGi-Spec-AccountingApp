@@ -10,7 +10,7 @@
 
 ```text
 +--------------------------------+
-| < Back      Accounts     Merge |
+| <           Accounts   [Merge] |
 +--------------------------------+
 | My Accounts        [+ Add]     |
 | [Icon] Account Name      [=]   |
@@ -26,6 +26,7 @@
 
 ### 導覽列
 
+- Header 模式: A
 - 返回按鈕
 - 帳戶管理 標題
 - 合併按鈕

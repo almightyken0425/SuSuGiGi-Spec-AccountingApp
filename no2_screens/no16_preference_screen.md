@@ -10,7 +10,7 @@
 
 ```text
 +--------------------------------+
-| < Back      Preferences        |
+| <           Preferences        |
 +--------------------------------+
 | Appearance                     |
 |  Theme: Current Theme >        |
@@ -36,6 +36,7 @@
 
 ### 導覽列
 
+- Header 模式: A
 - 返回按鈕
 - 偏好設定 標題
 

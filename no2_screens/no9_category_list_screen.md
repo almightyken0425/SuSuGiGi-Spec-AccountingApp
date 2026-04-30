@@ -10,7 +10,7 @@
 
 ```text
 +--------------------------------+
-| < Back      Categories   Merge |
+| <        Categories    [Merge] |
 +--------------------------------+
 | Expense            [+ Add]     |
 | [Icon] Category Name     [=]   |
@@ -28,6 +28,7 @@
 
 ### 導覽列
 
+- Header 模式: A
 - 返回按鈕
 - 類別管理 標題
 - 合併按鈕

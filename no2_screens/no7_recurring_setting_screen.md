@@ -16,8 +16,6 @@
 
 ```text
 +--------------------------------+
-| Recurring Settings    [Switch] |
-+--------------------------------+
 | Frequency                      |
 | [Daily][Weekly][Monthly][Yearly]
 |                                |
@@ -57,13 +55,13 @@
   - 間隔輸入框
   - 單位文字
     - **IF** 頻率為每日:
-      - 顯示 Day(s)
+      - 顯示 Day
     - **IF** 頻率為每週:
-      - 顯示 Week(s)
+      - 顯示 Week
     - **IF** 頻率為每月:
-      - 顯示 Month(s)
+      - 顯示 Month
     - **IF** 頻率為每年:
-      - 顯示 Year(s)
+      - 顯示 Year
 
 - 結束條件選項列
   - 永不選項
