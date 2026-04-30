@@ -2,17 +2,14 @@
 
 ## handlePostAuth 處理登入後初始化
 
-- 認證成功後，刷新 Premium 狀態並依用戶資料來源分派初始化路徑
+- 認證成功後，刷新 Premium 狀態並依雲端資料是否存在分派初始化路徑
+- 全 user 一致，不分付費層級
 - **執行:**
   - 向 IAP 服務查詢最新購買憑證，更新本地 Premium 到期狀態
-  - 查詢本地 Premium 權限狀態
-  - **IF** Premium 有效:
-    - 嘗試讀取 Firestore `users/{uid}` 文件
-    - **IF** 讀取成功且文件存在:
-      - 呼叫 syncSettingsFromCloud
-    - **ELSE** 文件不存在或讀取失敗:
-      - 呼叫 initializeNewUser
-  - **ELSE** Premium 無效:
+  - 嘗試讀取 Firestore `users/{uid}` 文件
+  - **IF** 讀取成功且文件存在:
+    - 呼叫 syncSettingsFromCloud
+  - **ELSE** 文件不存在或讀取失敗:
     - 呼叫 initializeNewUser
 
 ---
@@ -23,7 +20,7 @@
 - **輸入:**
   - Firestore `users/{uid}` 文件資料
 - **執行:**
-  - 取得 preferences 的 language、currency、timezone、theme，及 updatedAt 作為遠端時間
+  - 取得 preferences 的 language、currency、timezone、theme、launchMode，及 updatedAt 作為遠端時間
   - 讀取本機 Settings 表的 updatedOn 作為本機時間
   - **IF** 遠端時間大於本機時間，或本地無資料:
     - **寫入 Settings:**
@@ -34,11 +31,11 @@
         - `baseCurrencyId`
         - `timeZone`
         - `theme`
+        - `launchMode`
         - `updatedOn`
   - **ELSE** 本機時間大於遠端時間:
     - 不覆寫本機設定，不執行任何動作
-- **觸發:**
-  - 批次同步與定期交易檢查
+- 由 BatchSyncLogic 與定期交易檢查呼叫
 
 ---
 
@@ -58,6 +55,8 @@
         - 讀取裝置時區
       - 主題:
         - 預設 Default
+      - 啟動模式:
+        - 預設 home
   - **建立本機資料:**
     - **執行:**
       - 新增記錄至 Users 表及 Settings 表
@@ -67,12 +66,11 @@
       - `language`: 依語系決定
       - `timeZone`: 依時區決定
       - `theme`: Default
+      - `launchMode`: home
   - **建立雲端用戶文件:**
-    - **條件:**
-      - Premium 有效
     - **執行:**
       - 在 Firestore 建立 `users/{uid}` 文件
     - **欄位:**
-      - `uid`, `email`, `provider`
+      - `uid`、`email`、`provider`
       - `preferences`
       - `createdAt`

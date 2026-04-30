@@ -11,6 +11,7 @@
   - `baseCurrencyId`: Number - Foreign Key to Currencies, Not Null, 主要貨幣
   - `timeZone`: String - Not Null, IANA Timezone ID，例如 Asia/Taipei
   - `theme`: String - Not Null, 主題設定，例如 light、dark、system
+  - `launchMode`: String - Not Null, Default `home`, 啟動模式，可為 `home`、`expense`、`income`、`transfer`
   - `lastSyncedAt`: Number | Null, Unix Timestamp ms - Nullable, 上次完成同步的時間；Null 代表尚未同步過
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
@@ -106,6 +107,7 @@
   - `date`: Number, Unix Timestamp ms - Not Null, 匯率生效日期，儲存該日 00:00:00 UTC
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
+  - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable, Index
 
 ---
 

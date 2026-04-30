@@ -30,10 +30,6 @@
 - **輸入:**
   - 本次需變更的偏好設定欄位，未傳入的欄位不受影響
 - **執行:**
-  - **Premium 篩選:**
-    - 呼叫 canUserPerformAction，動作識別碼 triggerCloudSync
-    - **IF** 回傳禁止:
-      - 結束，不寫入 Firestore
   - 以逐欄 dot notation 方式更新 preferences，避免覆寫整個 preferences 物件
   - 自動更新 updatedAt 為當前時間，無論傳入欄位數量
   - **IF** Firestore 寫入失敗:
@@ -43,11 +39,11 @@
 
 ## setLaunchMode 設定啟動模式
 
-- 啟動模式為裝置專屬設定，不參與雲端同步
 - **輸入:**
   - 目標啟動模式
 - **執行:**
-  - 將啟動模式寫入本機快取
+  - 更新 `Settings` 表中的 `launchMode` 為目標值
+  - 呼叫 updateUserPreferences，帶入 launchMode 欄位為目標值
 
 ---
 
