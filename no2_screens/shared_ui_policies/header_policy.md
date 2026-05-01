@@ -80,8 +80,8 @@
   - **背景:**
     - 同模式 A
   - **搜尋頁特例:**
-    - 搜尋輸入框視為 header 緊貼物
-    - 搜尋輸入框 sticky 緊貼 header 下緣
+    - 搜尋輸入框採 FloatingSearchBar 浮層共用元件
+    - 細節依本政策搜尋輸入框 floating 規則段
 
 - **模式 E — Special-Dashboard 主畫面儀表板:**
   - **適用:**
@@ -151,10 +151,14 @@ HEADER_TOKENS:
   - 透過 useHeaderInset hook 取得 header 高度
   - 對容器加 paddingTop 動態值
 
-- **搜尋輸入框 sticky 規則:**
-  - 搜尋輸入框 paddingTop 採用 useHeaderHeight 動態值
-  - 搜尋輸入框緊貼 header 下緣
-  - 搜尋輸入框不隨 FlatList 滾動
+- **搜尋輸入框 floating 規則:**
+  - 搜尋輸入框一律採 FloatingSearchBar 浮層共用元件
+  - pill 採 GlassView 材質與 header 同套 Liquid Glass
+  - 浮層絕對定位於 header 下緣，內容滾動時 pill 隨之上推淡出
+  - 滾回頂端附近時 pill 隨之下拉淡入
+  - 禁止另設靜態 marginTop 或 paddingTop 撐高搜尋容器
+  - FlatList 必加 onScroll 連結 FloatingSearchBar 共用 scrollY
+  - FlatList 必加 contentContainerStyle paddingTop 等於 FloatingSearchBar 總高度
 
 ---
 
@@ -170,6 +174,7 @@ HEADER_TOKENS:
     - HeaderCheckmarkButton 處理 disabled 狀態
     - HeaderIconButton 通用 SF Symbol icon 按鈕
     - useHeaderInset hook 包裝 useHeaderHeight
+    - FloatingSearchBar 浮層搜尋輸入元件
 
 - **廢除:**
     - 手刻 View 形式的 ModalFormHeader
