@@ -179,8 +179,12 @@ LIST_TOKENS:
         - 圓角群組卡片包覆器
         - 自動以 overflow hidden 圓角 clip 第一個 row 的 borderTop
     - `ListSection`
-        - section title 與 body 容器
-        - title 套 LIST_TOKENS 規範
+        - 分組容器
+        - title prop 為 optional
+        - 現行 settings 系列螢幕統一不傳 title
+        - 改以 ListGroupCard 之間的空白間距區隔分組
+        - 對齊 iOS 26 inset-grouped 風格
+        - SECTION_TITLE_* token 保留供未來重新啟用
     - `ListSeparator`
         - hairline 分隔線元件
     - `SelectionListItem`
