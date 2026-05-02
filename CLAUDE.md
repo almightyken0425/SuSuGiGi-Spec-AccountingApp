@@ -49,6 +49,9 @@
     - 模式 C 簡化資料列表
     - 模式 D 拖拉列表
     - Custom 例外
+- `search_policy.md`
+    - 搜尋列共用元件政策
+    - 模式 Bottom Pill 底部固定 dock
 
 ---
 

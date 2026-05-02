@@ -33,7 +33,8 @@
 
 ### 搜尋列
 
-- 貨幣關鍵字輸入框
+- Search 模式: Bottom Pill
+- placeholder = 貨幣關鍵字
 
 ### 貨幣列表
 

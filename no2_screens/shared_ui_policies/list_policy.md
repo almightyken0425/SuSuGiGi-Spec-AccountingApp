@@ -125,6 +125,12 @@ LIST_TOKENS:
   TRAILING_VALUE_SIZE: 17
   GRID_COLUMNS: 2
   GRID_GAP: 12
+  EMPTY_STATE_ICON_SIZE: 48
+  EMPTY_STATE_TITLE_SIZE: 17
+  EMPTY_STATE_DESCRIPTION_SIZE: 14
+  EMPTY_STATE_ICON_GAP: 12
+  EMPTY_STATE_TEXT_GAP: 8
+  EMPTY_STATE_PADDING_HORIZONTAL: 24
 ```
 
 ---
@@ -145,6 +151,21 @@ LIST_TOKENS:
     - B-1 單列 trailing 顯示 `FontAwesome check` icon
     - B-1 selected 色為 `theme.primary.main`
     - B-2 網格右上 `FontAwesome check-circle` overlay 標示選中
+
+- **空狀態:**
+    - 任何含搜尋的列表必加 `ListEmptyState`
+    - 搜尋無結果採 title 為 `common.no_results`
+    - 搜尋無結果採 description 為 `「{searchQuery}」`
+    - 初始無資料採該 screen 對應的描述性訊息
+    - 載入中不顯示空狀態
+
+- **空狀態切換:**
+    - 含 `ListGroupCard` 的搜尋列表必用 `ListEmptyTransition` 包覆兩態
+    - empty 態不渲染卡片底色避免視覺殘留
+    - 兩態以 crossfade 動畫互換避免硬切
+    - `topInset` 對應 `useHeaderInset` 結果
+    - `bottomInset` 對應 `BOTTOM_SEARCH_BAR_TOTAL_HEIGHT + insets.bottom`
+    - 動畫期間舊態 pointerEvents 設為 none 避免誤觸
 
 ---
 
@@ -172,6 +193,17 @@ LIST_TOKENS:
     - `ReorderableListItem`
         - D 拖拉卡片
         - 拖拉手勢由整列觸發
+    - `ListEmptyState`
+        - 列表空狀態顯示元件
+        - 提供 icon 與 title 與 description 三個 slot
+        - 預設 icon 為 magnify
+        - 適用搜尋無結果與初始無資料兩種情境
+    - `ListEmptyTransition`
+        - list 與 empty 兩態 crossfade 動畫包覆器
+        - 內部以 absolute 疊兩層 Animated.View 對 opacity 互補補間
+        - props 為 `isEmpty` 與 `emptyState` 與 `children` 與 `topInset` 與 `bottomInset` 與 `duration`
+        - 預設 duration 220ms
+        - 切換時自動處理 pointerEvents 避免互動衝突
 
 - **保留:**
     - `FloatingSearchBar`

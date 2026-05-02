@@ -34,7 +34,8 @@
 
 ### 搜尋列
 
-- 時區關鍵字輸入框
+- Search 模式: Bottom Pill
+- placeholder = 時區關鍵字
 
 ### 時區列表
 

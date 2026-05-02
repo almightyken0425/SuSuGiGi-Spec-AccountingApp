@@ -32,7 +32,8 @@
 
 ### 搜尋區
 
-- 搜尋幣別 輸入框
+- Search 模式: Bottom Pill
+- placeholder = 搜尋幣別
 
 ### 匯率列表
 
