@@ -43,6 +43,8 @@
 
 ### 千分位模式 分組
 
+- List 模式: A
+- trailing 為 Switch 元件
 - 分組標題
 - 千分位切換列
   - 標題文字
@@ -55,6 +57,8 @@
 
 ### 小數位數 分組
 
+- List 模式: B-1
+- 最後 Reset 列改用 ListItem 並以 titleColor 強調，非 SelectionListItem
 - 分組標題
 - 小數位數選項：0、1、2、3
   - **IF** 為目前選取位數:

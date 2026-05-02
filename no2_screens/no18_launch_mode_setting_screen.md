@@ -32,6 +32,7 @@
 
 ### 啟動模式列表
 
+- List 模式: B-1
 - 啟動模式選項
   - 模式名稱：Default、Expense、Income、Transfer
   - **IF** 為目前選取模式:

@@ -37,6 +37,8 @@
 
 ### 貨幣列表
 
+- List 模式: A
+- 長 list 形態，row 自帶 hairline borderTop 形成邊到邊分隔
 - 貨幣項目
   - `alphabeticCode`
   - `name`

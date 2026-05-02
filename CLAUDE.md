@@ -31,6 +31,27 @@
 
 ---
 
+## 共用 UI 政策
+
+`no2_screens/shared_ui_policies/` 承載跨 screen 共用的 UI 規範。screen spec 標模式代號引用，不重述細節。
+
+- `header_policy.md`
+    - 導航列模式
+    - 模式 A 列表頁
+    - 模式 B 編輯頁
+    - 模式 C 表單 modal
+    - 模式 D 純展示 modal
+    - 模式 E 主畫面儀表板
+- `list_policy.md`
+    - 列表共用元件政策
+    - 模式 A 導航列表
+    - 模式 B 選擇列表，分 B-1 單列與 B-2 網格
+    - 模式 C 簡化資料列表
+    - 模式 D 拖拉列表
+    - Custom 例外
+
+---
+
 ## 術語規範
 
 本 module 特有詞彙延續頂層 Product git 定義。

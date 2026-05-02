@@ -53,6 +53,9 @@
 - 列表分組 Segmented Control
   - 類別分組、日期分組
 - 帳戶篩選
+  - List 模式: B-1
+  - trailing 為產品例外的綠色 checkbox，非 checkmark
+  - 保留既有 multi-select UX
   - 已選帳戶數量標題與全選/取消全選切換文字按鈕
   - Checkbox 列表，列出所有啟用中的帳戶
   - **IF** 僅剩一個帳戶被選取:
