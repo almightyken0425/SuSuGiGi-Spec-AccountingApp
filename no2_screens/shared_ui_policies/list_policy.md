@@ -36,13 +36,13 @@
         - 啟動模式
         - 時區
         - 基礎幣別
-        - 首頁篩選帳戶
         - Currency Rate Editor 內幣別選擇 modal
         - Account Editor 內幣別與類型 picker
         - Category Editor 內標準分類 picker
         - Currency Detail Config 小數位數
     - **B-2 網格適用:**
         - 主題設定
+        - 首頁篩選帳戶 visibility-toggle 變體
     - **B-1 元件條目順序:**
         - leading icon 可選
         - 主標
@@ -57,7 +57,19 @@
         - 選中以 checkmark 標示
         - 按下整列背景變淡灰
         - 多選用法不變更 trailing 樣式
-        - HomeFilter 採綠色 checkbox 為產品既有 UX 例外
+
+    - **B-2 visibility-toggle 變體:**
+        - 適用 HomeFilter 帳戶選取 grid
+        - 沿用 GRID_COLUMNS 與 GRID_GAP token
+        - 每格內含 icon 與名稱
+        - 不使用 checkmark overlay
+        - selected 為 opacity 1 與 theme.text.primary 字色
+        - unselected 為 opacity 0.4 與 theme.text.disabled 字色
+        - 點 tile 切換選取狀態
+        - 最後一個 selected 不可取消，呈 disabled 樣式
+        - **承載容器二選一:**
+            - 每格獨立 ListGroupCard：適用單選項獨立性強的場景，例如 HomeFilter 帳戶
+            - 共用單一 ListGroupCard：適用網格選一風格，例如 ThemeSettings
 
 - **模式 C — 簡化資料列表:**
     - **適用:**

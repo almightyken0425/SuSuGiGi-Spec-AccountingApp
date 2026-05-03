@@ -18,19 +18,22 @@
 +---------------------------------------+
 | [X]           Filter Report           |
 +---------------------------------------+
-| Time Granularity:                     |
-| [Day] [Week] [Month] [Year] [All]    |
 |                                       |
-| Chart Source:                         |
-| [Expense] [Income]                    |
+| +------+ +--------+ +-----------+     |
+| | Day  | | Expense| | Category  |     |
+| +------+ +--------+ +-----------+     |
 |                                       |
-| Group By:                             |
-| [Category] [Date]                     |
+| +-----------+   +-----------+         |
+| | Cash TWD  |   | Bank TWD  |         |
+| +-----------+   +-----------+         |
 |                                       |
-| Accounts (3 selected)   Select All    |
-| [x] Account A                         |
-| [x] Account B                         |
-| [ ] Account C                         |
+| +-----------+   +-----------+         |
+| | Cash USD  |   | Bank USD  |         |
+| +-----------+   +-----------+         |
+|                                       |
+| +-----------+   +-----------+         |
+| | Cash JPY  |   | Bank JPY  |         |
+| +-----------+   +-----------+         |
 +---------------------------------------+
 ```
 
@@ -44,37 +47,48 @@
 - 關閉按鈕
 - 篩選報表 標題
 
-### 篩選設定
+### 篩選摘要條
 
-- 時間粒度 Segmented Control
-  - 日、週、月、年、全部
-- 圖表來源 Segmented Control
-  - 支出、收入
-- 列表分組 Segmented Control
-  - 類別分組、日期分組
-- 帳戶篩選
-  - List 模式: B-1
-  - trailing 為產品例外的綠色 checkbox，非 checkmark
-  - 保留既有 multi-select UX
-  - 已選帳戶數量標題與全選/取消全選切換文字按鈕
-  - Checkbox 列表，列出所有啟用中的帳戶
-  - **IF** 僅剩一個帳戶被選取:
-    - 該帳戶列為不可點按狀態，半透明顯示
-  - **IF** 無可用帳戶:
-    - 顯示無帳戶提示文字
+- 3 張獨立 ListGroupCard 橫排
+- 條目順序依序為時間粒度、圖表來源、分組方式
+- 3 卡平分寬度
+- 各卡顯示對應維度當前選定值
+
+### 帳戶 Grid
+
+- List 模式: B-2 grid 多選變體
+- 無 section title
+- 每個帳戶為獨立 ListGroupCard
+- 2 欄排列
+- 每格顯示帳戶 icon 與名稱
+- selected 以正常顯示
+- unselected 以 opacity 0.4 與 disabled 字色呈現
+- **IF** 僅剩一個帳戶被選取:
+  - 該格不可點按，半透明顯示
+- **IF** 無可用帳戶:
+  - 顯示無帳戶提示為 disabled ListItem
 
 ---
 
 ## 互動
 
-- **變更任一篩選條件:**
-  - HomeScreen 報表即時更新
+- **點按篩選摘要 box:**
+  - 該 box 下方長出錨點 popover
+  - popover 顯示該維度的選項列表
+  - 含標題與當前選取值高亮
+  - **IF** 點按任一選項:
+    - 立即套用設定
+    - popover 關閉
+    - HomeScreen 報表即時更新
+  - **IF** 點按 popover 背景:
+    - 不變更設定
+    - popover 關閉
 
-- **點按全選/取消全選切換文字按鈕:**
-  - **IF** 目前為全選狀態:
-    - 取消全選
-  - **ELSE:**
-    - 全選所有帳戶
+- **點按帳戶格:**
+  - 切換該帳戶選取狀態
+  - HomeScreen 報表即時更新
+  - **IF** 該帳戶為僅剩一個被選取:
+    - 不可點按
 
 - **點按關閉按鈕:**
   - 關閉 Modal
