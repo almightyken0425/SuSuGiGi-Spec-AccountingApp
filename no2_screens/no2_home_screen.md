@@ -24,7 +24,7 @@
 |     NT$300          Lunch      10/25  |
 |     US$10.00 ≈NT$320          10/25  |
 |                                       |
-| [v] [->] To External      NT$1,000    |
+| [v] [->] External Account NT$1,000    |
 |     NT$1,000        Note       10/20  |
 |                                       |
 | Mode 2: Group by Date                 |
@@ -34,7 +34,7 @@
 |     [Icon] Food    US$10 ≈NT$320      |
 |                                       |
 | [v] Oct 20                 NT$1,000   |
-|     [->] Transfer Out  External       |
+|     [->] External Account             |
 |                         NT$1,000      |
 +---------------------------------------+
 | [Undo Mode]                           |
@@ -111,7 +111,7 @@
       - 備註
       - 金額
     - **IF** 轉帳紀錄:
-      - 方向圖示與轉出/轉入文字及外部帳戶名稱
+      - 方向圖示與外部帳戶名稱
       - 備註
       - 金額
   - 單筆紀錄列的類別圖示採統一主色
