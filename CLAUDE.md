@@ -2,16 +2,19 @@
 
 本 repo 為 SuSuGiGi 產品的 **Module Spec git**，module_id 為 `no2_accounting_app`，承載記帳 App 的行為規格。
 
-## 三層 git 配對
+## 四層 git 配對
 
 - **頂層 Product git：**
     - 位於 `../../`
     - 管理決策框架的上游四層
+- **對側 Module Design git：**
+    - 位於 Product git 的 `no3_product_designs/no2_accounting_app/`
+    - React HTML design canvas（intro / foundations / components / screens / explorations 五個 tab）
 - **本 Module Spec git：**
     - 即本 repo
-    - 位於 Product git 的 `no3_product_specs/no2_accounting_app/`
+    - 位於 Product git 的 `no4_product_specs/no2_accounting_app/`
 - **對側 Module Impl git：**
-    - 位於 Product git 的 `no5_product_development/no2_accounting_app/`
+    - 位於 Product git 的 `no6_product_development/no2_accounting_app/`
     - React Native CLI 記帳 App
 
 完整路徑與配對表由 `decision_framework_router` skill 的 `products_registry.md` 維護。
@@ -67,8 +70,11 @@
 
 ## 配對變動規則
 
-Spec 變動時通常需要三層聯動檢查。
+Spec 變動時通常需要四層聯動檢查。
 
+- 對側 Design 需檢查視覺工件
+    - `no2_screens/noN_<name>_screen.md` 對應 Design git 內的 `project/30_screens/screens.jsx` 的 ScreenComponent
+    - 若 Spec 新增畫面或變更版型，Design canvas 應跟進視覺
 - 對側 Impl 需檢查對應實作
     - `no1_data_models/<X>.md` 對應 Impl 的 `src/database/models/<X>.ts` 與 migration
     - `no2_screens/noN_<name>_screen.md` 對應 Impl 的 `src/screens/<Name>/`
