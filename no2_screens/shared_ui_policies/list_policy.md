@@ -1,13 +1,12 @@
-<!-- MIGRATING: policy-boundary-refactor -->
-
 # List Policy 列表共用元件政策
 
 ## 政策定位
 
 - 本 module 內所有 screen 共用的列表政策
-- 統一所有 list 場景的視覺模式、互動樣式、token
+- 統一所有 list 場景的模式分類與互動行為
 - screen spec 只標模式代號，不重述 row 細節
-- 落地實作層遵照本政策共用元件實作
+- 視覺定案由對側 Design git 的 `10_foundations/` 與 `20_components/` 承載
+- 實作元件、平台 API、套件選用由對側 Impl git 的 `CLAUDE.md` UI Coding Guideline 承載
 - 高度客製化的特殊資料列表標 Custom，不套用本政策
 
 ---
@@ -27,10 +26,10 @@
         - 主標
         - 副標可選
         - trailing 值文字可選
-        - chevron
+        - 後綴 chevron
     - **互動:**
         - 點擊跳轉至下層 screen 或開啟 modal
-        - 按下整列背景變淡灰
+        - 啟用按下回饋
 
 - **模式 B — Selection 列表:**
     - **B-1 單列適用:**
@@ -49,36 +48,34 @@
         - leading icon 可選
         - 主標
         - 副標可選
-        - trailing checkmark
+        - trailing 勾選圖示
     - **B-2 元件條目順序:**
         - 預覽 children slot
         - 名稱
-        - checkmark overlay
+        - 勾選圖示 overlay
     - **互動:**
         - 單選或多選
-        - 選中以 checkmark 標示
-        - 按下整列背景變淡灰
+        - 選中以勾選圖示標示
+        - 啟用按下回饋
         - 多選用法不變更 trailing 樣式
 
     - **B-2 visibility-toggle 變體:**
         - 適用 HomeFilter 帳戶選取 grid
-        - 沿用 GRID_COLUMNS 與 GRID_GAP token
         - 每格內含 icon 與名稱
-        - 不使用 checkmark overlay
-        - selected 為 opacity 1 與 theme.text.primary 字色
-        - unselected 為 opacity 0.4 與 theme.text.disabled 字色
+        - 以選中狀態與未選中狀態的視覺差異標示
+        - 不使用 勾選圖示 overlay
         - 點 tile 切換選取狀態
-        - 最後一個 selected 不可取消，呈 disabled 樣式
+        - 最後一個 selected 不可取消
         - **承載容器二選一:**
-            - 每格獨立 ListGroupCard：適用單選項獨立性強的場景，例如 HomeFilter 帳戶
-            - 共用單一 ListGroupCard：適用網格選一風格，例如 ThemeSettings
+            - 每格獨立群組卡片：適用單選項獨立性強的場景，例如 HomeFilter 帳戶
+            - 共用單一群組卡片：適用網格選一風格，例如 ThemeSettings
 
 - **模式 C — 簡化資料列表:**
     - **適用:**
         - 直接顯示一條條資料且可點擊跳編輯頁
         - row 結構接近 A 模式
     - **說明:**
-        - 視為 A 模式變體，使用相同 ListItem
+        - 視為 A 模式變體
         - 含金額換算、多幣別、分組折疊、搜尋 highlight 等複雜資料列表標為 Custom 不套用
 
 - **模式 D — Reorderable 列表:**
@@ -92,7 +89,7 @@
     - **互動:**
         - 長按拖拉排序
         - 點擊整列導向編輯
-        - 不啟用按下變淡灰，避免拖拉手勢衝突
+        - 不啟用按下回饋，避免與拖拉手勢衝突
 
 - **Custom Layout 例外:**
     - **適用:**
@@ -103,134 +100,37 @@
         - 例如匯入精靈
     - **規範:**
         - screen spec 標 `List 模式: Custom`
-        - 不要求對齊本政策視覺 token
-        - 仍應使用 LIST_TOKENS 中的字級、字重、padding 對齊
-
----
-
-## 視覺 token
-
-```yaml
-LIST_TOKENS:
-  ITEM_MIN_HEIGHT: 58
-  ITEM_PADDING_VERTICAL: 17
-  ITEM_PADDING_HORIZONTAL: 16
-  ITEM_GAP_HORIZONTAL: 12
-  ITEM_TITLE_SIZE: 17
-  ITEM_TITLE_WEIGHT: '300'
-  ICON_SIZE_SMALL: 20
-  ICON_SIZE_MEDIUM: 24
-  ICON_SIZE_LARGE: 40
-  DIVIDER_COLOR_LIGHT: 'rgba(60,60,67,0.10)'
-  DIVIDER_INSET_WITH_ICON: 48
-  DIVIDER_INSET_WITHOUT_ICON: 16
-  GROUP_CARD_RADIUS: 14
-  GROUP_CARD_MARGIN_BOTTOM: 35
-  SECTION_TITLE_SIZE: 13
-  SECTION_TITLE_WEIGHT: '400'
-  SECTION_TITLE_LETTER_SPACING: 0.5
-  SECTION_TITLE_PADDING_TOP: 12
-  SECTION_TITLE_PADDING_BOTTOM: 6
-  SECTION_TITLE_PADDING_HORIZONTAL: 16
-  SELECTION_ITEM_RADIUS: 8
-  SELECTION_CHECKMARK_SIZE: 16
-  TRAILING_CHEVRON_SIZE: 13
-  TRAILING_CHEVRON_WEIGHT: 'semibold'
-  TRAILING_VALUE_SIZE: 17
-  GRID_COLUMNS: 2
-  GRID_GAP: 12
-  EMPTY_STATE_ICON_SIZE: 48
-  EMPTY_STATE_TITLE_SIZE: 17
-  EMPTY_STATE_DESCRIPTION_SIZE: 14
-  EMPTY_STATE_ICON_GAP: 12
-  EMPTY_STATE_TEXT_GAP: 8
-  EMPTY_STATE_PADDING_HORIZONTAL: 24
-```
+        - 視覺仍對齊對側 Design git 的 list token 群組
 
 ---
 
 ## 互動規則
 
 - **按下回饋:**
-    - A / B 模式採 Pressable
-    - 按下整列背景變 `theme.bg.surface_hover`
-    - D 模式不變色，避免拖拉手勢衝突
+    - A / B 模式啟用
+    - D 模式禁用，避免與拖拉手勢衝突
 
 - **Disabled 樣式:**
-    - 主標顏色變 `theme.text.disabled`
-    - 整列 opacity 0.5 由 caller 視需求加
+    - 主標降為次要色
+    - 整列可由 caller 視需求降透明
     - 點擊回饋停用
 
 - **Selected 樣式:**
-    - B-1 單列 trailing 顯示 `FontAwesome check` icon
-    - B-1 selected 色為 `theme.primary.main`
-    - B-2 網格右上 `FontAwesome check-circle` overlay 標示選中
+    - B-1 單列 trailing 顯勾選圖示
+    - B-1 selected 採主色
+    - B-2 網格右上以 overlay 標示選中
 
 - **空狀態:**
-    - 任何含搜尋的列表必加 `ListEmptyState`
+    - 任何含搜尋的列表必顯空狀態
     - 搜尋無結果採 title 為 `common.no_results`
     - 搜尋無結果採 description 為 `「{searchQuery}」`
     - 初始無資料採該 screen 對應的描述性訊息
     - 載入中不顯示空狀態
 
 - **空狀態切換:**
-    - 含 `ListGroupCard` 的搜尋列表必用 `ListEmptyTransition` 包覆兩態
+    - 含群組卡片的搜尋列表，兩態切換以動畫互換避免硬切
     - empty 態不渲染卡片底色避免視覺殘留
-    - 兩態以 crossfade 動畫互換避免硬切
-    - `topInset` 對應 `useHeaderInset` 結果
-    - `bottomInset` 對應 `BOTTOM_SEARCH_BAR_TOTAL_HEIGHT + insets.bottom`
-    - 動畫期間舊態 pointerEvents 設為 none 避免誤觸
-
----
-
-## 共用元件決策
-
-- **新建元件:**
-    - `ListItem`
-        - A / B 共用基底
-        - 承載 `leftIcon` / `title` / `subtitle` / `trailing` / `value` / `showChevron` / `titleColor` / `disabled` 八個 slot
-    - `ListGroupCard`
-        - 圓角群組卡片包覆器
-        - 自動以 overflow hidden 圓角 clip 第一個 row 的 borderTop
-    - `ListSection`
-        - 分組容器
-        - title prop 為 optional
-        - 現行 settings 系列螢幕統一不傳 title
-        - 改以 ListGroupCard 之間的空白間距區隔分組
-        - 對齊 iOS 26 inset-grouped 風格
-        - SECTION_TITLE_* token 保留供未來重新啟用
-    - `ListSeparator`
-        - hairline 分隔線元件
-    - `SelectionListItem`
-        - B-1 單列選擇加 checkmark
-    - `SelectionGridItem`
-        - B-2 2 欄網格加 checkmark overlay 與 preview slot
-    - `DataListItem`
-        - 預留資料列元件
-        - 簡化 C 模式可選用
-    - `ReorderableListItem`
-        - D 拖拉卡片
-        - 拖拉手勢由整列觸發
-    - `ListEmptyState`
-        - 列表空狀態顯示元件
-        - 提供 icon 與 title 與 description 三個 slot
-        - 預設 icon 為 magnify
-        - 適用搜尋無結果與初始無資料兩種情境
-    - `ListEmptyTransition`
-        - list 與 empty 兩態 crossfade 動畫包覆器
-        - 內部以 absolute 疊兩層 Animated.View 對 opacity 互補補間
-        - props 為 `isEmpty` 與 `emptyState` 與 `children` 與 `topInset` 與 `bottomInset` 與 `duration`
-        - 預設 duration 220ms
-        - 切換時自動處理 pointerEvents 避免互動衝突
-
-- **保留:**
-    - `FloatingSearchBar`
-        - 既有 B / C 模式搜尋輸入元件
-    - `DynamicIcon`
-        - 既有 leading icon 渲染元件
-
-- **廢除:**
-    - 各 screen 內手刻的 `optionRow` / `rowButton` / `pickerItem` / `currencyItem` 樣式
+    - 切換期間舊態不接受互動
 
 ---
 
@@ -239,11 +139,10 @@ LIST_TOKENS:
 - **要求:**
     - 各 screen spec 在 list 區段開頭標註 `List 模式: A` 此類代號
     - 不重述 row 結構
-    - 不重述字級
-    - 不重述 padding
-    - 不重述視覺 token
+    - 不重述視覺定案
 
 - **合規寫法:**
+
 ```
 ### List
 
@@ -251,60 +150,9 @@ LIST_TOKENS:
 - 列項
   - leading icon = 設定圖
   - 主標 = i18n 鍵 settings.manage_categories
-  - chevron 跳轉至 CategoryList
+  - 後綴 chevron 跳轉至 CategoryList
 ```
 
 - **組合寫法:**
     - 含多種模式的 screen 用 `+` 連接，例如 `List 模式: A+B-1+B-1`
     - 純 Custom Layout 標 `List 模式: Custom` 並補充說明 row 結構
-
----
-
-## 落地實作參考
-
-- **長 list:**
-    - 條件
-        - 資料量 > 30
-    - 採用
-        - `FlatList` 直接放在 `ListGroupCard` 內
-        - row 元件自帶 hairline borderTop
-    - 不再使用
-        - `ItemSeparatorComponent`，避免與 row borderTop 重複
-
-- **短 list:**
-    - 條件
-        - 資料量 < 10 或設定型分組
-    - 採用
-        - `ScrollView` + `ListGroupCard` + `ListItem` 或 `SelectionListItem`
-        - GroupCard 圓角自動 clip 第一個 row borderTop
-
-- **B-1 選擇 list:**
-    - 採用
-        - `FlatList` 或 `ScrollView` 內含 `SelectionListItem`
-        - SelectionListItem 自帶 hairline borderTop
-
-- **B-2 網格:**
-    - 採用
-        - `flexDirection: row` + `flexWrap: wrap`
-        - 每格寬度 47% 加 `GRID_GAP`
-        - 每格用 `SelectionGridItem` 包裝
-        - children slot 放預覽內容
-
-- **D 拖拉 list:**
-    - 採用
-        - `react-native-drag-sort` 的 `AutoDragSortableView`
-        - 子元件 `ReorderableListItem` width 與 height 由 caller 透過 style 傳入
-        - caller 傳的 height 必須與 `childrenHeight` 一致
-        - ScrollView 容器使用 `useHeaderInset` 控制 paddingTop
-        - ScrollView 不使用 `contentInsetAdjustmentBehavior`，避免 bouncing 區與拖拉手勢衝突
-
-- **滾動容器規則:**
-    - 與 header_policy 一致
-    - FlatList / SectionList / ScrollView 必加 `contentInsetAdjustmentBehavior="automatic"`
-    - D 模式為例外
-    - 含 ListGroupCard 包 long FlatList 場景為例外
-
-- **與 FloatingSearchBar 整合:**
-    - 與 header_policy 一致
-    - 需設 `paddingTop: FLOATING_SEARCH_BAR_TOTAL_HEIGHT` 與 `onScroll={onScroll}`
-    - 包 ListGroupCard 的 long list 採 `useHeaderInset` 控制 wrapper marginTop
