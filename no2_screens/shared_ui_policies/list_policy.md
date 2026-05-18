@@ -1,3 +1,5 @@
+<!-- MIGRATING: policy-boundary-refactor -->
+
 # List Policy 列表共用元件政策
 
 ## 政策定位

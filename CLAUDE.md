@@ -19,6 +19,8 @@
 
 完整路徑與配對表由 `decision_framework_router` skill 的 `products_registry.md` 維護。
 
+配對 commit 使用相同 subject 與 body，branch 名稱逐字一致。
+
 ---
 
 ## 撰寫規範
@@ -28,9 +30,36 @@
 - Model 層位於 `no1_data_models/`，套用 `spec_writer` 的 model 政策
 - View 層位於 `no2_screens/`，套用 `spec_writer` 的 screen 政策
 - Logic 層位於 `no3_logics/`，套用 `spec_writer` 的 logic 政策
+- 跨層邊界另套用 `spec_writer/cross_layer_boundary_policy.md`
 - 所有 .md 額外套用 `universal_writing_linter` 通用政策
 
 修改前先 consult `decision_framework_router` skill 的上游 review 四問。
+
+---
+
+## 對側 git 對應路徑
+
+Spec 變動時須檢查對應的 Design 視覺、Impl 實作與上游 Product Map。本表列出本 module 各檔案類型的對側承載點，作為搬遷與配對檢查依據。
+
+### Design git 對側
+
+- 視覺 token 具體值權威：`no3_product_designs/no2_accounting_app/project/10_foundations/data.jsx`
+    - 已 export 群組：`TYPOGRAPHY`、`LIST_TOKENS`、`TX_LIST_TOKENS`、`SEARCH_BAR_TOKENS`、`SPACING`、`RADIUS`、`PALETTE`、`THEMES`、`GLASS`、`CHART_COLORS`、`ICON_LIBRARY`
+- 視覺定案展示：`project/10_foundations/foundations.jsx` 的 DCSection
+- 元件視覺與互動 sandbox：`project/20_components/`
+- 畫面對應：`no2_screens/noN_<name>_screen.md` 對應 Design git 內 `project/30_screens/screens.jsx` 的 ScreenComponent
+
+### Impl git 對側
+
+- 資料模型對應：`no1_data_models/<X>.md` 對應 Impl 的 `src/database/models/<X>.ts` 與 migration
+- 畫面對應：`no2_screens/noN_<name>_screen.md` 對應 Impl 的 `src/screens/<Name>/`
+- 邏輯對應：`no3_logics/<X>.md` 對應 Impl 的 `src/contexts/`、`src/services/` 或 `src/hooks/`
+- coding guideline 承載點：Impl repo 的 `CLAUDE.md` 之「開發注意事項」章節（含元件名、自定 hook、平台 API、第三方套件、廢除清單）
+
+### 上游 Product git
+
+- Product Map 對應子目錄：`../../no2_product_planning/no2_product_map/no2_accounting_app/`
+- 需求層：`../../no2_product_planning/no1_requirements/`，牽涉新問題時補條目
 
 ---
 
@@ -38,23 +67,9 @@
 
 `no2_screens/shared_ui_policies/` 承載跨 screen 共用的 UI 規範。screen spec 標模式代號引用，不重述細節。
 
-- `header_policy.md`
-    - 導航列模式
-    - 模式 A 列表頁
-    - 模式 B 編輯頁
-    - 模式 C 表單 modal
-    - 模式 D 純展示 modal
-    - 模式 E 主畫面儀表板
-- `list_policy.md`
-    - 列表共用元件政策
-    - 模式 A 導航列表
-    - 模式 B 選擇列表，分 B-1 單列與 B-2 網格
-    - 模式 C 簡化資料列表
-    - 模式 D 拖拉列表
-    - Custom 例外
-- `search_policy.md`
-    - 搜尋列共用元件政策
-    - 模式 Bottom Pill 底部固定 dock
+- `header_policy.md`：導航列模式 A 列表頁 / B 編輯頁 / C 表單 modal / D 純展示 modal / E 主畫面儀表板
+- `list_policy.md`：列表模式 A 導航 / B 選擇（B-1 單列、B-2 網格）/ C 簡化資料 / D 拖拉 / Custom 例外
+- `search_policy.md`：搜尋模式 Bottom Pill 底部固定 dock
 
 ---
 
@@ -65,21 +80,3 @@
 - 付費等級使用 `LEVEL_0`、`LEVEL_1`、`LEVEL_2`、`LEVEL_3`、`LEVEL_B` 形式
 - LEVEL 的商業定義由頂層 Product git 的 `no1_product_initiation/no3_business_model.md` 承載
 - LEVEL 在本 module 視角下的能力清單由 Product Map 的 `no2_accounting_app/` 子目錄或既有 `app/payment.md` 承載
-
----
-
-## 配對變動規則
-
-Spec 變動時通常需要四層聯動檢查。
-
-- 對側 Design 需檢查視覺工件
-    - `no2_screens/noN_<name>_screen.md` 對應 Design git 內的 `project/30_screens/screens.jsx` 的 ScreenComponent
-    - 若 Spec 新增畫面或變更版型，Design canvas 應跟進視覺
-- 對側 Impl 需檢查對應實作
-    - `no1_data_models/<X>.md` 對應 Impl 的 `src/database/models/<X>.ts` 與 migration
-    - `no2_screens/noN_<name>_screen.md` 對應 Impl 的 `src/screens/<Name>/`
-    - `no3_logics/<X>.md` 對應 Impl 的 `src/contexts/`、`src/services/` 或 `src/hooks/`
-- 上游 Product Map 需確認本變動已反映
-- 需求層若牽涉新問題需補 `no1_requirements/` 條目
-
-配對 commit 使用相同 subject 與 body，branch 名稱逐字一致。

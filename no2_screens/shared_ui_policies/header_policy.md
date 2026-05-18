@@ -1,3 +1,5 @@
+<!-- MIGRATING: policy-boundary-refactor -->
+
 # Header Policy 導航列共用元件政策
 
 ## 政策定位

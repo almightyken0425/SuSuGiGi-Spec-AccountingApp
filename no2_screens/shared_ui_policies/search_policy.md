@@ -1,3 +1,5 @@
+<!-- MIGRATING: policy-boundary-refactor -->
+
 # Search Policy 搜尋列共用元件政策
 
 ## 政策定位
