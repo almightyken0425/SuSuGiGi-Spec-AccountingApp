@@ -44,7 +44,7 @@ Spec 變動時須檢查對應的 Design 視覺、Impl 實作與上游 Product Ma
 ### Design git 對側
 
 - 視覺 token 具體值權威：`no3_product_designs/no2_accounting_app/project/10_foundations/data.jsx`
-    - 已 export 群組：`TYPOGRAPHY`、`LIST_TOKENS`、`TX_LIST_TOKENS`、`SEARCH_BAR_TOKENS`、`SPACING`、`RADIUS`、`PALETTE`、`THEMES`、`GLASS`、`CHART_COLORS`、`ICON_LIBRARY`
+    - 已 export 群組：`TYPOGRAPHY`、`LIST_TOKENS`、`TX_LIST_TOKENS`、`SEARCH_BAR_TOKENS`、`SPACING`、`RADIUS`、`ICON_SIZE`、`HIT_TARGET`、`PALETTE`、`THEMES`、`GLASS`、`CHART_COLORS`、`ICON_LIBRARY`
 - 視覺定案展示：`project/10_foundations/foundations.jsx` 的 DCSection
 - 元件視覺與互動 sandbox：`project/20_components/`
 - 畫面對應：`no2_screens/noN_<name>_screen.md` 對應 Design git 內 `project/30_screens/screens.jsx` 的 ScreenComponent
