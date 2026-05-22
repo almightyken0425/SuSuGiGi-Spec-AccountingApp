@@ -10,13 +10,13 @@
 
 ```text
 +--------------------------------+
-| <        Categories    [Merge] |
+| <      Categories  [Merge][+]  |
 +--------------------------------+
-| Expense            [+ Add]     |
+| Expense                        |
 | [Icon] Category Name     [=]   |
 | [Icon] Category Name     [=]   |
 |                                |
-| Income             [+ Add]     |
+| Income                         |
 | [Icon] Category Name     [=]   |
 | [Icon] Category Name     [=]   |
 +--------------------------------+
@@ -32,12 +32,12 @@
 - 返回按鈕
 - 類別管理 標題
 - 合併按鈕
+- 新增按鈕
 
 ### 支出區
 
 - List 模式: D
 - 支出 標題
-- 新增按鈕
 - 類別列表
   - **IF** 列表為空:
     - 顯示尚未建立任何支出類別提示
@@ -52,7 +52,6 @@
 
 - List 模式: D
 - 收入 標題
-- 新增按鈕
 - 類別列表
   - **IF** 列表為空:
     - 顯示尚未建立任何收入類別提示
@@ -78,10 +77,11 @@
   - **IF** 回傳禁止:
     - 導航至 PaywallScreen
   - **ELSE:**
-    - 導航至 CategoryEditorScreen
+    - 導航至 CategoryEditorScreen，不帶類別類型參數
+    - 類別類型由 CategoryEditorScreen 的類別類型選擇器預設為支出
 
 - **點按類別列表項目:**
   - 導航至 CategoryEditorScreen
 
 - **拖拉類別列表項目:**
-  - 依所在分區的分類類型呼叫 reorderCategories
+  - 依所在分區的類別類型呼叫 reorderCategories

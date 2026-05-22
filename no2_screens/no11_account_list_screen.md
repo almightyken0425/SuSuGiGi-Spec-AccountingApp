@@ -10,9 +10,9 @@
 
 ```text
 +--------------------------------+
-| <           Accounts   [Merge] |
+| <       Accounts   [Merge][+]  |
 +--------------------------------+
-| My Accounts        [+ Add]     |
+| My Accounts                    |
 | [Icon] Account Name      [=]   |
 |        Type                    |
 | [Icon] Account Name      [=]   |
@@ -30,12 +30,12 @@
 - 返回按鈕
 - 帳戶管理 標題
 - 合併按鈕
+- 新增按鈕
 
 ### 帳戶區
 
 - List 模式: D
 - 我的帳戶 標題
-- 新增按鈕
 - 帳戶列表
   - **IF** 列表為空:
     - 顯示尚未建立任何帳戶提示
