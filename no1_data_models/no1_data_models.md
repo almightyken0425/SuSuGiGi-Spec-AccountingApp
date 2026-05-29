@@ -29,7 +29,7 @@
   - `id`: String, UUID/GUID - Primary Key
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
   - `name`: String - Not Null
-  - `iconId`: Number - Foreign Key to IconDefinitions, Not Null
+  - `iconId`: Number - Foreign Key to IconDefinitions, Not Null, 須為 tags 含 account 的圖示
   - `currencyCode`: String - Not Null, 帳戶幣別 ISO Alpha Code，例如 TWD
   - `typeId`: Number - Foreign Key to StandardAccountTypes, Not Null
   - `sortOrder`: Number - Not Null, Default 0, 使用者自訂排序位置
@@ -48,7 +48,7 @@
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
   - `name`: String - Not Null
   - `type`: String - Not Null, expense 或 income，決定此類別為支出或收入
-  - `iconId`: Number - Foreign Key to IconDefinitions, Not Null
+  - `iconId`: Number - Foreign Key to IconDefinitions, Not Null, 須為 tags 含 category 的圖示
   - `standardCategoryId`: Number - Foreign Key to StandardCategory, Not Null, 用於報表歸類
   - `sortOrder`: Number - Not Null, Default 0, 使用者自訂排序位置
   - `disabledOn`: Number | Null, Unix Timestamp ms - Nullable, 使用者主動停用此類別的時間；Null 代表啟用中
@@ -173,10 +173,10 @@
   - `assets/definitions/IconDefinition.json`
 - **欄位:**
   - `id`: `Number`
-  - `uniqueName`: `String` - 唯一識別名稱，格式如 mci-food、ant-star
-  - `library`: `String` - 圖示庫名稱，例如 MaterialCommunityIcons、AntDesign
+  - `uniqueName`: `String` - 唯一識別名稱，格式如 ph-wallet、ph-bread
+  - `library`: `String` - 圖示庫名稱，目前統一為 svg（Phosphor SVG）
   - `glyph`: `String` - 圖示庫內的字型名稱
-  - `tags`: `Array<String>` - 用途標籤，例如 category、account
+  - `tags`: `Array<String>` - 用途標籤，界定圖示適用域；account 供帳戶使用，category 供類別使用
 
 ---
 
@@ -191,6 +191,7 @@
   - `categoryType`: `Number` - 0 代表收入，1 代表支出
   - `translationKey`: `String`
   - `defaultName`: `String`
+  - `defaultIconId`: `Number` - 該標準分類預設圖示，對應 IconDefinitions 中 tags 含 category 的圖示
 
 ---
 

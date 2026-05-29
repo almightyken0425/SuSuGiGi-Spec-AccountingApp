@@ -7,6 +7,7 @@
 - **欄位約束:**
   - `type` 為必填，須為 `expense` 或 `income`
   - `standardCategoryId` 必須屬於與 `type` 同邊的標準分類
+  - `iconId` 必須引用 `tags` 含 `category` 的 `IconDefinitions` 記錄
 - **寫入 Category:**
   - **執行:**
     - 新增一筆記錄至 `Categories` 表

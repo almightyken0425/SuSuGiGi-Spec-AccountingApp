@@ -4,6 +4,8 @@
 
 - **輸入:**
   - 帳戶資料
+- **欄位約束:**
+  - `iconId` 必須引用 `tags` 含 `account` 的 `IconDefinitions` 記錄
 - **寫入 Account:**
   - **執行:**
     - 新增一筆記錄至 `Accounts` 表
