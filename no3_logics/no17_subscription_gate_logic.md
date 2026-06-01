@@ -93,6 +93,7 @@
     - **ELSE:**
       - **回傳:** 允許
   - **IF** 動作識別碼為 createRecurringTransaction:
+    - 此動作同時涵蓋新增定期與存取既有定期規則的授權，LEVEL_0 兩者皆禁止
     - **IF** 當前訂閱等級為 LEVEL_0:
       - **回傳:** 禁止
     - **ELSE:**
