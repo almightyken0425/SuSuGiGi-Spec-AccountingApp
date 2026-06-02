@@ -105,7 +105,11 @@
         - 呼叫 updateSchedule
   - **IF** 一般交易:
     - **IF** 新增模式:
-      - 呼叫 createTransaction
+      - 呼叫 canUserPerformAction，動作識別碼 createTransaction
+      - **IF** 回傳禁止:
+        - 導航至 PaywallScreen
+      - **ELSE:**
+        - 呼叫 createTransaction
     - **IF** 編輯模式:
       - 呼叫 updateTransaction
   - **IF** 操作成功:

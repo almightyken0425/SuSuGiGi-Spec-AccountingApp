@@ -117,7 +117,11 @@
         - 呼叫 updateSchedule
   - **IF** 一般轉帳:
     - **IF** 新增模式:
-      - 呼叫 createTransfer
+      - 呼叫 canUserPerformAction，動作識別碼 createTransfer
+      - **IF** 回傳禁止:
+        - 導航至 PaywallScreen
+      - **ELSE:**
+        - 呼叫 createTransfer
     - **IF** 編輯模式:
       - 呼叫 updateTransfer
   - **IF** 操作成功:

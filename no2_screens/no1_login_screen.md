@@ -50,6 +50,9 @@
   - **IF** 操作中:
     - 顯示載入狀態
   - **IF** 操作成功:
-    - 導航至 HomeScreen
+    - 呼叫 resolveLaunchDestination，取得初始落點與付費牆攔截結果
+    - 導航至初始落點
+    - **IF** 攔截付費牆:
+      - 導航至 PaywallScreen
   - **IF** 操作失敗:
     - 顯示登入失敗提示
