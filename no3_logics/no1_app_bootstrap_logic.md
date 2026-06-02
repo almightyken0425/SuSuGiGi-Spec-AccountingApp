@@ -4,7 +4,7 @@
 
 ## bootstrapApp 啟動 App
 
-- 確認 Firebase Auth 狀態，並依登入結果調度背景任務
+- 確認 Firebase Auth 狀態，依登入結果調度背景任務並決定初始導航
 - **執行:**
   - 讀取本地快取的 Firebase Auth 狀態
   - **IF** 已登入:
@@ -12,6 +12,10 @@
     - 查詢本地快取的 Premium 權限狀態
     - **IF** Premium 權限有效:
       - 呼叫 runPremiumBackgroundTasks，於背景執行付費者同步任務
+    - 呼叫 resolveLaunchDestination，取得初始落點與付費牆攔截結果
+    - 導航至初始落點
+    - **IF** 攔截付費牆:
+      - 導航至 PaywallScreen
 
 ---
 
@@ -43,3 +47,42 @@
   - **執行:**
     - 觸發批次同步流程
     - 更新上次同步時間為當前時間
+
+---
+
+## resolveLaunchDestination 解析啟動導航目的地
+
+- 依啟動模式與訂閱授權，回傳初始落點與是否攔截付費牆
+- 啟動模式指向 editor 時，先經 canUserPerformAction 閘控
+- 訂閱受限不變動啟動模式，僅以付費牆攔截當次啟動
+- **執行:**
+  - 讀取 Settings 表的 launchMode
+  - **IF** launchMode 為 home:
+    - **回傳:**
+      - 初始落點 HomeScreen
+      - 不攔截付費牆
+  - **IF** launchMode 為 expense 或 income:
+    - 呼叫 canUserPerformAction，動作識別碼 createTransaction
+    - **IF** 回傳禁止:
+      - **回傳:**
+        - 初始落點 HomeScreen
+        - 攔截付費牆
+    - **IF** 回傳允許:
+      - **IF** launchMode 為 expense:
+        - **回傳:**
+          - 初始落點 TransactionEditorScreen 支出模式
+          - 不攔截付費牆
+      - **IF** launchMode 為 income:
+        - **回傳:**
+          - 初始落點 TransactionEditorScreen 收入模式
+          - 不攔截付費牆
+  - **IF** launchMode 為 transfer:
+    - 呼叫 canUserPerformAction，動作識別碼 createTransfer
+    - **IF** 回傳禁止:
+      - **回傳:**
+        - 初始落點 HomeScreen
+        - 攔截付費牆
+    - **IF** 回傳允許:
+      - **回傳:**
+        - 初始落點 TransferEditorScreen
+        - 不攔截付費牆
