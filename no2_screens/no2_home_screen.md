@@ -151,14 +151,12 @@
 
 ### Footer
 
-- **IF** 未啟用 Undo Mode:
-  - 新增支出按鈕
-  - 新增轉帳按鈕
-  - 新增收入按鈕
-- **IF** 啟用 Undo Mode:
-  - 倒數計時圓圈
-  - Undo 訊息文字
-  - 關閉按鈕
+- 新增支出按鈕
+- 新增轉帳按鈕
+- 新增收入按鈕
+- **IF** Undo Bar 啟用:
+  - Undo Bar 覆蓋於此，暫時取代新增按鈕
+  - Undo Bar 為全域元件，結構與互動見 shared_ui_policies 的 undo_bar_policy
 
 ### 載入狀態
 
@@ -239,9 +237,3 @@
 
 - **捲動回主內容區起點:**
   - 環形圖區塊顯示
-
-- **點按 Undo 訊息文字:**
-  - 呼叫 executeUndo
-
-- **點按倒數計時圓圈或關閉按鈕:**
-  - 呼叫 closeUndo
