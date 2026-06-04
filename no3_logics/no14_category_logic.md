@@ -3,10 +3,9 @@
 ## createCategory 建立分類
 
 - **輸入:**
-  - 分類資料（含 type、name、standardCategoryId、iconId、disabledOn）
+  - 分類資料（含 type、name、iconId、disabledOn）
 - **欄位約束:**
   - `type` 為必填，須為 `expense` 或 `income`
-  - `standardCategoryId` 必須屬於與 `type` 同邊的標準分類
   - `iconId` 必須引用 `tags` 含 `category` 的 `IconDefinitions` 記錄
 - **寫入 Category:**
   - **執行:**
@@ -17,11 +16,9 @@
 - **輸入:**
   - 分類識別碼、可更新欄位
 - **可更新欄位:**
-  - `name`、`standardCategoryId`、`iconId`、`disabledOn`
+  - `name`、`iconId`、`disabledOn`
 - **禁止更新欄位:**
   - `type`：避免改變已建立分類的類型，導致歷史交易分類錯亂
-- **欄位約束:**
-  - 更新後的 `standardCategoryId` 須仍屬於該分類 `type` 同邊的標準分類
 - **更新 Category:**
   - **執行:**
     - 更新 `Categories` 表中的記錄

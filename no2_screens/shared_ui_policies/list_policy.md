@@ -38,8 +38,8 @@
         - 時區
         - 基礎幣別
         - Currency Rate Editor 內幣別選擇 modal
-        - Account Editor 內幣別與類型 picker
-        - Category Editor 內標準分類 picker
+        - Account Editor 內幣別 picker
+        - Category Editor 內收支 picker
         - Currency Detail Config 小數位數
     - **B-2 網格適用:**
         - 主題設定
