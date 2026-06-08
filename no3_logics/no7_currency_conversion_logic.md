@@ -8,7 +8,8 @@
 
 ## resolveCurrencyRate 查找匯率
 
-- 給定幣別對，查找最新有效匯率
+- 給定幣別對，查找最新有效匯率，回傳主單位對主單位匯率
+- 僅查原始幣別與基礎幣別的直接紀錄，不經中間幣別接力換算；無直接紀錄時回 1
 - **輸入:**
   - 原始幣別
   - 基礎幣別
@@ -30,6 +31,7 @@
 ## createInitialCurrencyRate 建立初始匯率
 
 - 為新建立的非基礎幣別帳戶寫入初始匯率，供後續換算使用
+- 匯入不呼叫本操作；匯入僅透過 createTransaction 與 createTransfer 建立資料，跨幣別匯率由 createTransfer 連動產生，無紀錄則 resolveCurrencyRate 回傳 1
 - **輸入:**
   - 原始幣別
   - 基礎幣別

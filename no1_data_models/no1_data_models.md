@@ -63,7 +63,7 @@
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
   - `accountId`: String - Foreign Key to Accounts, Not Null
   - `categoryId`: String - Foreign Key to Categories, Not Null
-  - `amount`: Number - Not Null, 金額，以幣別最小單位儲存
+  - `amount`: Number - Not Null, 金額，以固定倍率縮放的整數，與幣別無關
   - `date`: Number, Unix Timestamp ms - Not Null, 交易發生日，使用者可編輯，用於報表與排序
   - `note`: String | Null - Nullable, 用於搜尋
   - `scheduleId`: String | Null - Foreign Key to Schedules, Nullable
@@ -81,9 +81,9 @@
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
   - `accountFromId`: String - Foreign Key to Accounts, Not Null
   - `accountToId`: String - Foreign Key to Accounts, Not Null
-  - `amountFrom`: Number - Not Null, 轉出帳戶的金額，以該帳戶幣別計
-  - `amountTo`: Number - Not Null, 轉入帳戶的金額，以該帳戶幣別計
-  - `impliedRate`: Number | Null - Nullable, 匯率乘以一百萬後的整數；同步至 Firestore 時欄位名稱轉為 impliedRateScaled
+  - `amountFrom`: Number - Not Null, 轉出金額，以固定倍率縮放的整數，與幣別無關
+  - `amountTo`: Number - Not Null, 轉入金額，以固定倍率縮放的整數，與幣別無關
+  - `impliedRate`: Number | Null - Nullable, 主單位對主單位匯率；同步至 Firestore 時欄位名稱轉為 impliedRateScaled
   - `date`: Number, Unix Timestamp ms - Not Null, 轉帳發生日，用於報表篩選
   - `note`: String | Null - Nullable, 用於搜尋
   - `scheduleId`: String | Null - Foreign Key to Schedules, Nullable
@@ -101,7 +101,7 @@
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
   - `currencyFromId`: Number - Foreign Key to Currencies, Not Null
   - `currencyToId`: Number - Foreign Key to Currencies, Not Null
-  - `rate`: Number - Not Null, 匯率乘以一百萬後的整數
+  - `rate`: Number - Not Null, 主單位對主單位匯率
   - `date`: Number, Unix Timestamp ms - Not Null, 匯率生效日期，儲存該日 00:00:00 UTC
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
