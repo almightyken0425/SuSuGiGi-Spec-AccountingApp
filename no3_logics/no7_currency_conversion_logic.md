@@ -42,6 +42,20 @@
 
 ---
 
+## createCurrencyRate 手動新增匯率
+
+- 使用者在匯率編輯器手動指定幣別對與匯率，寫入一筆匯率紀錄；與 createInitialCurrencyRate 的帳戶初始化入口區隔
+- **輸入:**
+  - 來源幣別
+  - 目標幣別
+  - 匯率
+  - 日期
+- **寫入 CurrencyRate:**
+  - **執行:**
+    - 新增一筆記錄至 `CurrencyRates` 表
+
+---
+
 ## resolveTransferDisplay 取得轉帳顯示資料
 
 - 依所選帳戶範圍，判斷轉帳的顯示方式及是否需要換算

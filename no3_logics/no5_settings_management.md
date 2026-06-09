@@ -1,4 +1,4 @@
-# 設定管理: SettingsManagement
+# 設定管理: SettingsManagementLogic
 
 ## initializeTheme 主題初始化
 

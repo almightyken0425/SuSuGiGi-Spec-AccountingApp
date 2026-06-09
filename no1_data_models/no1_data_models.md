@@ -203,15 +203,16 @@
 - **說明:**
   - 執行期 Premium 等級狀態；IAP 原始資料快取於 User 實體的 IAP 欄位
 - **欄位:**
-  - `currentTier`: String - Not Null, 當前 Premium 等級
+  - `currentTier`: String - Not Null, 當前 Premium 等級，僅涵蓋 IAP 可解析的範圍
     - `LEVEL_0`
     - `LEVEL_1`
     - `LEVEL_2`
+    - LEVEL_3、LEVEL_B 非 IAP 解析持有的 runtime tier，故不列入
     - **來源:**
       - 從 IAP 服務回傳的有效訂閱列表解析
     - **能力規範:**
       - 記帳 App 視角下各 LEVEL 可用能力的白話總覽見 `no2_product_planning/no2_product_map/app/payment.md` 的 LEVEL 能力清單
-      - 動作識別碼與授權判斷邏輯見 `no3_product_specs/no2_accounting_app/no3_logics/no17_subscription_gate_logic.md`
+      - 動作識別碼與授權判斷邏輯見 `no4_product_specs/no2_accounting_app/no3_logics/no17_subscription_gate_logic.md`
 
 ---
 

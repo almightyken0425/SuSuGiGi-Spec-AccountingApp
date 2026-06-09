@@ -93,7 +93,7 @@
   - **IF** 類別模式:
     - 呼叫 mergeCategories
   - **IF** 操作成功:
-    - 呼叫 UndoLogic.showUndo
+    - 呼叫 showUndo
     - 返回上一頁
   - **IF** 操作失敗:
     - 顯示錯誤提示

@@ -11,7 +11,7 @@
 - 由 BatchSyncLogic 統一協調觸發
 - 禁止從銀行 API 直接讀取交易資料
 - 禁止透過 OS AI 自動爬取 mail、簡訊、支付 App 通知
-- 不執行自動分類建議，屬 LEVEL_3 AIAdvisor 範疇
+- 不執行自動分類建議
 - 不依賴外部即時匯率 API，採 Strict Direct Rate
 
 ---
