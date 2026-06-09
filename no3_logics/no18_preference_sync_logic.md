@@ -4,7 +4,7 @@
 
 - L2 PreferenceSync 的同步政策層
 - 定義 push 與 pull 邊界、同步範圍、衝突解決原則
-- push 入口委派至 SettingsManagement 的 updateUserPreferences
+- push 入口委派至 SettingsManagementLogic 的 updateUserPreferences
 - pull 入口委派至 PostAuthLogic 的 syncSettingsFromCloud
 - 排程觸發由 BatchSyncLogic 統一協調
 - 不使用 Firestore Real-time listener，避免 read 成本
@@ -23,6 +23,7 @@
     - language
     - timeZone
     - launchMode
+    - analyticsConsent
 
 ---
 

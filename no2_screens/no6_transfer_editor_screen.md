@@ -136,11 +136,11 @@
     - **IF** 選擇僅此一筆 或 此筆及未來:
       - 呼叫 deleteSchedule
       - **IF** 操作成功:
-        - 呼叫 UndoLogic.showUndo
+        - 呼叫 showUndo
   - **IF** 一般轉帳:
     - 呼叫 deleteTransfer
     - **IF** 操作成功:
-      - 呼叫 UndoLogic.showUndo
+      - 呼叫 showUndo
   - **IF** 操作成功:
     - 返回上一頁
   - **IF** 操作失敗:

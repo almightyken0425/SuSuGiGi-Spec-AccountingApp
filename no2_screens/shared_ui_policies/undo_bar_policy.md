@@ -4,7 +4,7 @@
 
 - Undo Bar 為全域底部覆蓋元件，不屬任一 screen
 - 符合條件的可復原操作完成後，覆蓋於使用者返回的當前畫面底部
-- screen spec 不重述 Undo Bar 結構，只在觸發處標註 `呼叫 UndoLogic.showUndo`
+- screen spec 不重述 Undo Bar 結構，只在觸發處標註 `呼叫 showUndo`
 - 狀態機行為由 no3_logics 的 UndoLogic 承載
 - 視覺定案由對側 Design git 的 `10_foundations/` 與 `20_components/` 承載
 - 實作元件、平台 API、套件選用由對側 Impl git 的 `CLAUDE.md` UI Coding Guideline 承載
@@ -13,7 +13,7 @@
 
 ## 出現時機
 
-- 由 UndoLogic.showUndo 觸發顯示
+- 由 showUndo 觸發顯示
 - 觸發來源:
     - 交易編輯器刪除交易（一般或定期，定期含僅此一筆與此筆及未來）
     - 轉帳編輯器刪除轉帳（一般或定期）
@@ -47,13 +47,13 @@
 ## screen spec 引用方式
 
 - **要求:**
-    - 編輯器 screen 在刪除或合併成功處標註 `呼叫 UndoLogic.showUndo`
+    - 編輯器 screen 在刪除或合併成功處標註 `呼叫 showUndo`
     - 不重述 Undo Bar 結構與互動
     - 不宣告 Undo Bar 為某 screen 的局部元件
 - **合規寫法:**
 
 ```
 - **IF** 操作成功:
-  - 呼叫 UndoLogic.showUndo
+  - 呼叫 showUndo
   - 返回上一頁
 ```

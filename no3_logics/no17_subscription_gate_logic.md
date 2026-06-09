@@ -25,10 +25,10 @@
     - createTransaction
     - createTransfer
   - 禁止動作:
-    - useForeignCurrency
     - createRecurringTransaction
     - triggerMultiDeviceSync
     - importData
+    - exportData
     - manageCurrencyRate
   - 不在禁止清單，含 LEVEL_0 在內全 LEVEL 允許:
     - triggerCloudBackup
@@ -40,7 +40,7 @@
   - 禁止動作: 無
   - 總數限制: 無
   - 說明:
-    - LEVEL_2 為 Logic Engine 訂閱者，記帳 App 視角下能力與 LEVEL_1 相同
+    - LEVEL_2 記帳 App 視角下能力與 LEVEL_1 相同
     - 授權判斷採用當前訂閱等級大於等於 LEVEL_1 即允許的形式
 
 ---
@@ -55,11 +55,11 @@
   - createCategory
   - createTransaction
   - createTransfer
-  - useForeignCurrency
   - createRecurringTransaction
   - triggerCloudBackup
   - triggerMultiDeviceSync
   - importData
+  - exportData
   - manageCurrencyRate
 - **性質:**
   - 純本地計算，可讀取當前使用者的帳戶總數與類別總數
@@ -82,18 +82,14 @@
         - **回傳:** 禁止
     - **ELSE:**
       - **回傳:** 允許
-  - **IF** 動作識別碼為 useForeignCurrency:
-    - **IF** 當前訂閱等級為 LEVEL_0:
-      - **回傳:** 禁止
-    - **ELSE:**
-      - **回傳:** 允許
   - **IF** 動作識別碼為 manageCurrencyRate:
     - **IF** 當前訂閱等級為 LEVEL_0:
       - **回傳:** 禁止
     - **ELSE:**
       - **回傳:** 允許
   - **IF** 動作識別碼為 createRecurringTransaction:
-    - 此動作同時涵蓋新增定期與存取既有定期規則的授權，LEVEL_0 兩者皆禁止
+    - 此動作僅涵蓋新增定期排程的授權，LEVEL_0 禁止新增
+    - 既有定期排程的到期實例由背景自動產生，不經本判斷、不受訂閱等級影響
     - **IF** 當前訂閱等級為 LEVEL_0:
       - **回傳:** 禁止
     - **ELSE:**
@@ -106,6 +102,11 @@
     - **ELSE:**
       - **回傳:** 允許
   - **IF** 動作識別碼為 importData:
+    - **IF** 當前訂閱等級為 LEVEL_0:
+      - **回傳:** 禁止
+    - **ELSE:**
+      - **回傳:** 允許
+  - **IF** 動作識別碼為 exportData:
     - **IF** 當前訂閱等級為 LEVEL_0:
       - **回傳:** 禁止
     - **ELSE:**

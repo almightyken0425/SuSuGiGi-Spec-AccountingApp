@@ -61,28 +61,44 @@
     - 顯示還原失敗對話框
 
 - **點按匯入收入支出:**
-  - 導航至 ImportWizardScreen，帶入交易模式
+  - 呼叫 canUserPerformAction 查核 importData 權限
+  - **IF** 回傳禁止:
+    - 導航至 PaywallScreen
+  - **ELSE:**
+    - 導航至 ImportWizardScreen，帶入交易模式
 
 - **點按匯入轉帳:**
-  - 導航至 ImportWizardScreen，帶入轉帳模式
+  - 呼叫 canUserPerformAction 查核 importData 權限
+  - **IF** 回傳禁止:
+    - 導航至 PaywallScreen
+  - **ELSE:**
+    - 導航至 ImportWizardScreen，帶入轉帳模式
 
 - **點按匯出收入支出:**
-  - 執行交易匯出
-  - **IF** 操作中:
-    - 阻擋重複觸發直到完成
-  - **IF** 無資料可匯出:
-    - 顯示無資料對話框
-  - **IF** 操作失敗:
-    - 顯示匯出失敗對話框
+  - 呼叫 canUserPerformAction 查核 exportData 權限
+  - **IF** 回傳禁止:
+    - 導航至 PaywallScreen
+  - **ELSE:**
+    - 呼叫 exportToCsv，匯出類型 交易
+    - **IF** 操作中:
+      - 阻擋重複觸發直到完成
+    - **IF** 無資料可匯出:
+      - 顯示無資料對話框
+    - **IF** 操作失敗:
+      - 顯示匯出失敗對話框
 
 - **點按匯出轉帳:**
-  - 執行轉帳匯出
-  - **IF** 操作中:
-    - 阻擋重複觸發直到完成
-  - **IF** 無資料可匯出:
-    - 顯示無資料對話框
-  - **IF** 操作失敗:
-    - 顯示匯出失敗對話框
+  - 呼叫 canUserPerformAction 查核 exportData 權限
+  - **IF** 回傳禁止:
+    - 導航至 PaywallScreen
+  - **ELSE:**
+    - 呼叫 exportToCsv，匯出類型 轉帳
+    - **IF** 操作中:
+      - 阻擋重複觸發直到完成
+    - **IF** 無資料可匯出:
+      - 顯示無資料對話框
+    - **IF** 操作失敗:
+      - 顯示匯出失敗對話框
 
 - **點按清除資料庫:**
   - 顯示確認對話框

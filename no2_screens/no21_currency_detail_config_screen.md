@@ -58,7 +58,7 @@
 ### 小數位數 分組
 
 - List 模式: B-1
-- 最後 Reset 列改用 ListItem 並以 titleColor 強調，非 SelectionListItem
+- 最後 重置為預設值 列為導向動作列、非選取列，標題以強調色呈現
 - 分組標題
 - 小數位數選項：0、1、2、3
   - **IF** 為目前選取位數:

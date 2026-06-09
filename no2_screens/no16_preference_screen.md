@@ -22,6 +22,8 @@
 |  Language: 繁體中文 >          |
 |  Time Zone: Asia/Taipei >      |
 +--------------------------------+
+|  Allow Data Analytics    [ON]  |
++--------------------------------+
 |  Login / Logout                |
 +--------------------------------+
 ```
@@ -57,6 +59,9 @@
   - 時區 入口
     - 顯示當前設定的時區
 - 第四組
+  - 分析同意 開關
+    - 顯示 analyticsConsent 目前狀態
+- 第五組
   - **IF** 已登入:
     - 登出 按鈕
   - **IF** 未登入:
@@ -94,10 +99,14 @@
 - **點按時區:**
   - 導航至 TimeZoneSettingScreen
 
+- **切換分析同意開關:**
+  - 呼叫 setAnalyticsConsent
+  - 即時生效
+
 - **點按登出:**
   - 顯示登出確認對話框
   - **IF** 確認登出:
-    - 呼叫 signOut
+    - 呼叫 logout
     - **IF** 操作成功:
       - 導航至 LoginScreen
     - **IF** 操作失敗:

@@ -1,4 +1,4 @@
-# 定期交易核心邏輯: RecurringTransactions
+# 定期交易核心邏輯: RecurringTransactionsLogic
 
 ## createSchedule 建立排程
 

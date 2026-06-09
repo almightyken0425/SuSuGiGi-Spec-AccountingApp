@@ -12,6 +12,7 @@
   - `timeZone`: String - Not Null, IANA Timezone ID，例如 Asia/Taipei
   - `theme`: String - Not Null, 主題設定，例如 light、dark、system
   - `launchMode`: String - Not Null, Default `home`, 啟動模式，可為 `home`、`expense`、`income`、`transfer`
+  - `analyticsConsent`: Boolean - Not Null, Default `true`, 分析同意開關，控制記帳資料是否納入分析管線
   - `lastSyncedAt`: Number | Null, Unix Timestamp ms - Nullable, 上次完成同步的時間；Null 代表尚未同步過
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
@@ -19,6 +20,7 @@
 **與 User Management 的關係**: 此表為 `users/{uid}/preferences` 的本地快取。
 - `language`、`timeZone`、`theme` 直接對應
 - `baseCurrencyId` 對應 `preferences.currency`，需進行 ID 與 ISO Code 雙向轉換
+- `analyticsConsent` 對應 `preferences.analyticsConsent`，預設 true
 - 需保持雙向同步
 
 ---
@@ -63,7 +65,7 @@
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
   - `accountId`: String - Foreign Key to Accounts, Not Null
   - `categoryId`: String - Foreign Key to Categories, Not Null
-  - `amount`: Number - Not Null, 金額，以幣別最小單位儲存
+  - `amount`: Number - Not Null, 金額，以固定倍率縮放的整數，與幣別無關
   - `date`: Number, Unix Timestamp ms - Not Null, 交易發生日，使用者可編輯，用於報表與排序
   - `note`: String | Null - Nullable, 用於搜尋
   - `scheduleId`: String | Null - Foreign Key to Schedules, Nullable
@@ -81,9 +83,9 @@
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
   - `accountFromId`: String - Foreign Key to Accounts, Not Null
   - `accountToId`: String - Foreign Key to Accounts, Not Null
-  - `amountFrom`: Number - Not Null, 轉出帳戶的金額，以該帳戶幣別計
-  - `amountTo`: Number - Not Null, 轉入帳戶的金額，以該帳戶幣別計
-  - `impliedRate`: Number | Null - Nullable, 匯率乘以一百萬後的整數；同步至 Firestore 時欄位名稱轉為 impliedRateScaled
+  - `amountFrom`: Number - Not Null, 轉出金額，以固定倍率縮放的整數，與幣別無關
+  - `amountTo`: Number - Not Null, 轉入金額，以固定倍率縮放的整數，與幣別無關
+  - `impliedRate`: Number | Null - Nullable, 主單位對主單位匯率；同步至 Firestore 時欄位名稱轉為 impliedRateScaled
   - `date`: Number, Unix Timestamp ms - Not Null, 轉帳發生日，用於報表篩選
   - `note`: String | Null - Nullable, 用於搜尋
   - `scheduleId`: String | Null - Foreign Key to Schedules, Nullable
@@ -101,7 +103,7 @@
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
   - `currencyFromId`: Number - Foreign Key to Currencies, Not Null
   - `currencyToId`: Number - Foreign Key to Currencies, Not Null
-  - `rate`: Number - Not Null, 匯率乘以一百萬後的整數
+  - `rate`: Number - Not Null, 主單位對主單位匯率
   - `date`: Number, Unix Timestamp ms - Not Null, 匯率生效日期，儲存該日 00:00:00 UTC
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
@@ -201,15 +203,16 @@
 - **說明:**
   - 執行期 Premium 等級狀態；IAP 原始資料快取於 User 實體的 IAP 欄位
 - **欄位:**
-  - `currentTier`: String - Not Null, 當前 Premium 等級
+  - `currentTier`: String - Not Null, 當前 Premium 等級，僅涵蓋 IAP 可解析的範圍
     - `LEVEL_0`
     - `LEVEL_1`
     - `LEVEL_2`
+    - LEVEL_3、LEVEL_B 非 IAP 解析持有的 runtime tier，故不列入
     - **來源:**
       - 從 IAP 服務回傳的有效訂閱列表解析
     - **能力規範:**
       - 記帳 App 視角下各 LEVEL 可用能力的白話總覽見 `no2_product_planning/no2_product_map/app/payment.md` 的 LEVEL 能力清單
-      - 動作識別碼與授權判斷邏輯見 `no3_product_specs/no2_accounting_app/no3_logics/no17_subscription_gate_logic.md`
+      - 動作識別碼與授權判斷邏輯見 `no4_product_specs/no2_accounting_app/no3_logics/no17_subscription_gate_logic.md`
 
 ---
 

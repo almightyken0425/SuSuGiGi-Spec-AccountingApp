@@ -1,4 +1,4 @@
-# 設定管理: SettingsManagement
+# 設定管理: SettingsManagementLogic
 
 ## initializeTheme 主題初始化
 
@@ -75,6 +75,16 @@
 - **執行:**
   - 更新 `Settings` 表中的 `timeZone` 為目標值
   - 呼叫 updateUserPreferences，帶入 timeZone 欄位為目標值
+
+---
+
+## setAnalyticsConsent 設定分析同意
+
+- **輸入:**
+  - 目標同意狀態
+- **執行:**
+  - 更新 `Settings` 表中的 `analyticsConsent` 為目標值
+  - 呼叫 updateUserPreferences，帶入 analyticsConsent 欄位為目標值
 
 ---
 
