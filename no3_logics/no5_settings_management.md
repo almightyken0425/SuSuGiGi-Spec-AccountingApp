@@ -78,6 +78,16 @@
 
 ---
 
+## setAnalyticsConsent 設定分析同意
+
+- **輸入:**
+  - 目標同意狀態
+- **執行:**
+  - 更新 `Settings` 表中的 `analyticsConsent` 為目標值
+  - 呼叫 updateUserPreferences，帶入 analyticsConsent 欄位為目標值
+
+---
+
 ## setCurrencyFormat 設定貨幣顯示格式
 
 - **輸入:**
