@@ -38,7 +38,7 @@
   - `disabledOn`: Number | Null, Unix Timestamp ms - Nullable, 使用者主動停用此帳戶的時間；Null 代表啟用中
   - `createdAt`: Number, Unix Timestamp ms - Not Null, 資料建立的系統時間
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
-  - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable, Index
+  - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable
 
 ---
 
@@ -54,7 +54,7 @@
   - `disabledOn`: Number | Null, Unix Timestamp ms - Nullable, 使用者主動停用此類別的時間；Null 代表啟用中
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
-  - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable, Index
+  - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable
 
 ---
 
@@ -63,16 +63,16 @@
 - **欄位:**
   - `id`: String, UUID/GUID - Primary Key
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
-  - `accountId`: String - Foreign Key to Accounts, Not Null
-  - `categoryId`: String - Foreign Key to Categories, Not Null
+  - `accountId`: String - Foreign Key to Accounts, Not Null, Index
+  - `categoryId`: String - Foreign Key to Categories, Not Null, Index
   - `amount`: Number - Not Null, 金額，以固定倍率縮放的整數，與幣別無關
-  - `date`: Number, Unix Timestamp ms - Not Null, 交易發生日，使用者可編輯，用於報表與排序
+  - `date`: Number, Unix Timestamp ms - Not Null, Index, 交易發生日，使用者可編輯，用於報表與排序
   - `note`: String | Null - Nullable, 用於搜尋
   - `scheduleId`: String | Null - Foreign Key to Schedules, Nullable
   - `scheduleInstanceDate`: Number | Null, Unix Timestamp ms - Nullable
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
-  - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable, Index
+  - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable
 
 ---
 
@@ -81,18 +81,18 @@
 - **欄位:**
   - `id`: String, UUID/GUID - Primary Key
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
-  - `accountFromId`: String - Foreign Key to Accounts, Not Null
-  - `accountToId`: String - Foreign Key to Accounts, Not Null
+  - `accountFromId`: String - Foreign Key to Accounts, Not Null, Index
+  - `accountToId`: String - Foreign Key to Accounts, Not Null, Index
   - `amountFrom`: Number - Not Null, 轉出金額，以固定倍率縮放的整數，與幣別無關
   - `amountTo`: Number - Not Null, 轉入金額，以固定倍率縮放的整數，與幣別無關
   - `impliedRate`: Number | Null - Nullable, 主單位對主單位匯率；同步至 Firestore 時欄位名稱轉為 impliedRateScaled
-  - `date`: Number, Unix Timestamp ms - Not Null, 轉帳發生日，用於報表篩選
+  - `date`: Number, Unix Timestamp ms - Not Null, Index, 轉帳發生日，用於報表篩選
   - `note`: String | Null - Nullable, 用於搜尋
   - `scheduleId`: String | Null - Foreign Key to Schedules, Nullable
   - `scheduleInstanceDate`: Number | Null, Unix Timestamp ms - Nullable
   - `createdAt`: Number, Unix Timestamp ms - Not Null, 資料建立的系統時間
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
-  - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable, Index
+  - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable
 
 ---
 
@@ -104,10 +104,10 @@
   - `currencyFromId`: Number - Foreign Key to Currencies, Not Null
   - `currencyToId`: Number - Foreign Key to Currencies, Not Null
   - `rate`: Number - Not Null, 主單位對主單位匯率
-  - `date`: Number, Unix Timestamp ms - Not Null, 匯率生效日期，儲存該日 00:00:00 UTC
+  - `date`: Number, Unix Timestamp ms - Not Null, Index, 匯率生效日期，儲存該日 00:00:00 UTC
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
-  - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable, Index
+  - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable
 
 ---
 
@@ -121,6 +121,9 @@
   - `useThousandsUnit`: Boolean - Not Null, 是否以千為單位顯示
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null
+
+**與 Firestore 的關係**: 此表不同步至雲端，僅存於本地。
+- 幣別顯示偏好屬裝置層級設定，不隨帳號跨裝置同步
 
 ---
 
@@ -144,7 +147,7 @@
   - `templateNote`: String | Null - Nullable
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null
-  - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable, Index
+  - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable
 
 ---
 
