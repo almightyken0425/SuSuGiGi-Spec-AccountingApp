@@ -23,6 +23,7 @@
     - language
     - timeZone
     - launchMode
+    - analyticsConsent
 
 ---
 

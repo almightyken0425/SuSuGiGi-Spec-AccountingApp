@@ -12,6 +12,7 @@
   - `timeZone`: String - Not Null, IANA Timezone ID，例如 Asia/Taipei
   - `theme`: String - Not Null, 主題設定，例如 light、dark、system
   - `launchMode`: String - Not Null, Default `home`, 啟動模式，可為 `home`、`expense`、`income`、`transfer`
+  - `analyticsConsent`: Boolean - Not Null, Default `true`, 分析同意開關，控制記帳資料是否納入分析管線
   - `lastSyncedAt`: Number | Null, Unix Timestamp ms - Nullable, 上次完成同步的時間；Null 代表尚未同步過
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
@@ -19,6 +20,7 @@
 **與 User Management 的關係**: 此表為 `users/{uid}/preferences` 的本地快取。
 - `language`、`timeZone`、`theme` 直接對應
 - `baseCurrencyId` 對應 `preferences.currency`，需進行 ID 與 ISO Code 雙向轉換
+- `analyticsConsent` 對應 `preferences.analyticsConsent`，預設 true
 - 需保持雙向同步
 
 ---
