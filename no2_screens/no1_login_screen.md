@@ -46,7 +46,7 @@
 ## 互動
 
 - **點按 Google 登入按鈕:**
-  - 呼叫 handlePostAuth
+  - 呼叫 handleLogin
   - **IF** 操作中:
     - 顯示載入狀態
   - **IF** 操作成功:
