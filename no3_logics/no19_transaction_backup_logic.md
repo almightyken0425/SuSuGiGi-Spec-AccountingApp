@@ -6,7 +6,7 @@
 - 將 transactions、transfers、accounts、categories、currency_rates、schedules 寫入 Firestore users/{uid}/{collection}
 - 全 user 寫入，含 LEVEL_0 免費版，不受 analyticsConsent flag 影響
 - 法律基礎為 Contract，履行記帳服務契約所必要
-- 單向上傳，無 user 端取回介面；user 取回走 L4 FullBackupLogic
+- 單向上傳，無 user 端取回介面
 - 不使用 Firestore Real-time listener
 - 由 BatchSyncLogic 統一協調觸發
 - 禁止從銀行 API 直接讀取交易資料
