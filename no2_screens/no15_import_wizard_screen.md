@@ -235,12 +235,12 @@
     - 顯示檔案名稱
 
 - **點按下載範本按鈕:**
-  - 呼叫 downloadTemplate
+  - 呼叫 shareTemplate
   - **IF** 操作失敗:
     - 顯示下載失敗對話框
 
 - **點按下載說明按鈕:**
-  - 呼叫 downloadInstructions
+  - 呼叫 shareInstructions
   - **IF** 操作失敗:
     - 顯示下載失敗對話框
 
