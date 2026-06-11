@@ -49,10 +49,10 @@
   - 模式適用展開後的清單
   - **IF** 收合:
     - 顯示當前所選幣別與展開指示器
-    - 顯示格式為「代碼 - 名稱」對偶，與 BaseCurrencySettingScreen 對齊
+    - 幣別顯示 `alphabeticCode` 與 `name`，與 BaseCurrencySettingScreen 對齊
   - **IF** 展開:
     - 搜尋輸入框
-    - 幣別列表（每項顯示「代碼 - 名稱」對偶格式）
+    - 幣別列表，每項顯示 `alphabeticCode` 與 `name`
   - **IF** 編輯模式:
     - 顯示為停用樣式
     - 不可修改
@@ -92,13 +92,6 @@
 
 - **點按完成按鈕:**
   - **IF** 新增模式:
-    - 呼叫 canUserPerformAction，動作識別碼 createAccount
-    - **IF** 回傳禁止:
-      - 導航至 PaywallScreen
-    - **IF** 選擇外幣:
-      - 呼叫 canUserPerformAction，動作識別碼 useForeignCurrency
-      - **IF** 回傳禁止:
-        - 導航至 PaywallScreen
     - 呼叫 createAccount
     - **IF** 操作成功:
       - 返回上一頁
