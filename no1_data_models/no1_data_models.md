@@ -177,7 +177,7 @@
 - **欄位:**
   - `id`: `Number`
   - `uniqueName`: `String` - 唯一識別名稱，格式如 ph-wallet、ph-bread
-  - `library`: `String` - 圖示庫名稱，目前統一為 svg（Phosphor SVG）
+  - `library`: `String` - 圖示庫名稱，目前統一為 svg，採用 Phosphor SVG 圖示庫
   - `glyph`: `String` - 圖示庫內的字型名稱
   - `tags`: `Array<String>` - 用途標籤，界定圖示適用域；account 供帳戶使用，category 供類別使用
 
