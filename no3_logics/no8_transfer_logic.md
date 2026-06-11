@@ -5,41 +5,90 @@
 - 建立轉帳紀錄，跨幣別時 Append-Only 補錄隱含匯率
 - **輸入:**
   - 轉帳資料
-- **IF** 輸入缺少 Transfers 必填欄位 (userId / accountFromId / accountToId / amountFrom / amountTo / date):
+- **IF** 輸入缺少必填欄位 `userId`、`accountFromId`、`accountToId`、`amountFrom`、`amountTo`、`date` 其中之一:
   - **回傳:** 驗證失敗
 - **IF** amountFrom 小於等於 0 或 amountTo 小於等於 0:
   - **回傳:** 驗證失敗
 - **IF** accountFromId 等於 accountToId:
   - **回傳:** 驗證失敗
 - **ELSE:**
+  - **隱含匯率計算:**
+    - **條件:**
+      - 轉出與轉入帳戶幣別不同
+    - **執行:**
+      - 隱含匯率為 amountTo 除以 amountFrom
+  - **幣別驗證:**
+    - **條件:**
+      - 跨幣別轉帳且有隱含匯率
+    - **執行:**
+      - 任何寫入前先解析兩帳戶幣別代碼
+      - **IF** 任一幣別代碼無法解析:
+        - 中止全部寫入
+        - **回傳:** 驗證失敗
   - **寫入 Transfer:**
     - **執行:**
       - 新增一筆記錄至 `Transfers` 表
+    - **欄位:**
+      - `impliedRate`: 隱含匯率，同幣別轉帳為空值
+      - `scheduleId`: 依輸入寫入，未帶為空值
+      - `scheduleInstanceDate`: 依輸入寫入，未帶為空值
   - **匯率連動 Append-Only:**
     - **條件:**
       - 跨幣別轉帳且有隱含匯率
     - **執行:**
-      - 新增一筆記錄至 `CurrencyRates` 表
+      - 新增正反兩筆記錄至 `CurrencyRates` 表
+      - 正向記錄為轉出對轉入幣別，匯率為隱含匯率
+      - 反向記錄為轉入對轉出幣別，匯率為隱含匯率的倒數
+      - 兩筆記錄的生效日期皆為轉帳發生日
+
+---
 
 ## updateTransfer 更新轉帳
 
 - **輸入:**
   - 轉帳資料
-- **IF** 輸入缺少 Transfers 必填欄位 (userId / accountFromId / accountToId / amountFrom / amountTo / date):
+- **IF** 輸入缺少必填欄位 `userId`、`accountFromId`、`accountToId`、`amountFrom`、`amountTo`、`date` 其中之一:
   - **回傳:** 驗證失敗
 - **IF** amountFrom 小於等於 0 或 amountTo 小於等於 0:
   - **回傳:** 驗證失敗
 - **IF** accountFromId 等於 accountToId:
   - **回傳:** 驗證失敗
 - **ELSE:**
-  - **更新 Transfer:**
+  - **隱含匯率計算:**
+    - **條件:**
+      - 轉出與轉入帳戶幣別不同
     - **執行:**
-      - 更新 `Transfers` 表中的記錄
-  - **匯率連動 Append-Only:**
+      - 以更新後金額重算隱含匯率
+      - 隱含匯率為 amountTo 除以 amountFrom
+  - **幣別驗證:**
     - **條件:**
       - 跨幣別且隱含匯率變動或交易日期變動
     - **執行:**
-      - 新增一筆記錄至 `CurrencyRates` 表
+      - 任何寫入前先解析兩帳戶幣別代碼
+      - **IF** 任一幣別代碼無法解析:
+        - 中止全部寫入
+        - **回傳:** 驗證失敗
+  - **更新 Transfer:**
+    - **執行:**
+      - 更新 `Transfers` 表中的記錄
+    - **欄位:**
+      - `impliedRate`: 重算後的隱含匯率，同幣別轉帳為空值
+  - **排程連結保留:**
+    - **行為:**
+      - `scheduleId` 與 `scheduleInstanceDate` 逐欄位獨立判斷
+      - 輸入有帶該欄位才改寫
+      - 未帶則保留記錄原值
+  - **匯率連動 Append-Only:**
+    - **條件:**
+      - 跨幣別且隱含匯率變動或交易日期變動
+      - 變動判斷以更新前的原值為基準
+    - **執行:**
+      - 新增正反兩筆記錄至 `CurrencyRates` 表
+      - 正向記錄為轉出對轉入幣別，匯率為新隱含匯率
+      - 反向記錄為轉入對轉出幣別，匯率為新隱含匯率的倒數
+      - 兩筆記錄的生效日期皆為更新後的轉帳發生日
+
+---
 
 ## deleteTransfer 刪除轉帳
 
