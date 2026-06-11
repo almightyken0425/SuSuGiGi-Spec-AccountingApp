@@ -251,9 +251,6 @@
   - 更新該帳戶或類別的匯入動作
 
 - **點按送出:**
-  - 呼叫 canUserPerformAction，動作識別碼 importData
-  - **IF** 回傳禁止:
-    - 導航至 PaywallScreen
   - 呼叫 executeImport
   - **IF** 操作中:
     - 顯示載入狀態

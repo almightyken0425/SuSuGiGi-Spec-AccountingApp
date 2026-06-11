@@ -105,15 +105,11 @@
 
 - **點按完成按鈕:**
   - **IF** 新增模式:
-    - 呼叫 canUserPerformAction，動作識別碼 createCategory
-    - **IF** 回傳禁止:
-      - 導航至 PaywallScreen
-    - **ELSE:**
-      - 呼叫 createCategory
-      - **IF** 操作成功:
-        - 返回上一頁
-      - **IF** 操作失敗:
-        - 顯示錯誤提示
+    - 呼叫 createCategory
+    - **IF** 操作成功:
+      - 返回上一頁
+    - **IF** 操作失敗:
+      - 顯示錯誤提示
   - **IF** 編輯模式:
     - 呼叫 updateCategory
     - **IF** 操作成功:
