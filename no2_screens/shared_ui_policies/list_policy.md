@@ -7,7 +7,8 @@
 - screen spec 只標模式代號，不重述 row 細節
 - 視覺定案由對側 Design git 的 `10_foundations/` 與 `20_components/` 承載
 - 實作元件、平台 API、套件選用由對側 Impl git 的 `CLAUDE.md` UI Coding Guideline 承載
-- 高度客製化的特殊資料列表標 Custom，不套用本政策
+- 高度客製化的特殊資料列表標 Custom，不套用本政策的模式分類；
+- 狀態行為仍受互動規則約束
 
 ---
 
@@ -101,6 +102,7 @@
     - **規範:**
         - screen spec 標 `List 模式: Custom`
         - 視覺仍對齊對側 Design git 的 list token 群組
+        - 含搜尋或空狀態時，空狀態與載入呈現依互動規則的空狀態與空狀態切換節，不另定義
 
 ---
 
