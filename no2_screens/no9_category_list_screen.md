@@ -13,12 +13,12 @@
 | <      Categories  [Merge][+]  |
 +--------------------------------+
 | Expense                        |
-| [Icon] Category Name     [=]   |
-| [Icon] Category Name     [=]   |
+| [Icon] Category Name           |
+| [Icon] Category Name           |
 |                                |
 | Income                         |
-| [Icon] Category Name     [=]   |
-| [Icon] Category Name     [=]   |
+| [Icon] Category Name           |
+| [Icon] Category Name           |
 +--------------------------------+
 ```
 
@@ -39,12 +39,9 @@
 - List 模式: D
 - 支出 標題
 - 類別列表
-  - **IF** 列表為空:
-    - 顯示尚未建立任何支出類別提示
   - 類別列表項目
     - 圖示
     - 名稱
-    - 拖拉圖示
     - **IF** 已停用:
       - 顯示灰色文字與已停用標籤
 
@@ -53,12 +50,9 @@
 - List 模式: D
 - 收入 標題
 - 類別列表
-  - **IF** 列表為空:
-    - 顯示尚未建立任何收入類別提示
   - 類別列表項目
     - 圖示
     - 名稱
-    - 拖拉圖示
     - **IF** 已停用:
       - 顯示灰色文字與已停用標籤
 
