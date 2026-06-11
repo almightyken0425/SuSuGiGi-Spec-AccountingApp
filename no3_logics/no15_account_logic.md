@@ -10,7 +10,7 @@
   - **執行:**
     - 新增一筆記錄至 `Accounts` 表
 - **IF** 幣別非基礎幣別:
-  - 呼叫 createInitialCurrencyRate 寫入初始匯率
+  - 呼叫 createInitialCurrencyRate 種入佔位匯率
 
 ## updateAccount 更新帳戶
 

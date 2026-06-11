@@ -28,17 +28,36 @@
 
 ---
 
+## getCurrencyPairs 列出帳戶幣別對
+
+- 為匯率列表畫面組裝顯示用的幣別對清單
+- **輸入:**
+  - 基礎幣別
+- **性質:**
+  - 純本地計算，不發出網路請求
+- **執行:**
+  - 蒐集所有帳戶使用、且不等於基礎幣別的外幣，去除重複
+  - 對每個外幣與基礎幣別配對，以 resolveCurrencyRate 查找該對匯率
+- **回傳:**
+  - 各外幣對基礎幣別的幣別對與匯率清單
+
+---
+
 ## createInitialCurrencyRate 建立初始匯率
 
-- 為新建立的非基礎幣別帳戶寫入初始匯率，供後續換算使用
+- 為新建立的非基礎幣別帳戶種入一筆佔位匯率，供後續換算使用
+- 種入的匯率值固定為 1，僅作佔位
+- 真實匯率待後續 createTransfer 連動產生，或由使用者透過 createCurrencyRate 手動修正
 - 匯入不呼叫本操作；匯入僅透過 createTransaction 與 createTransfer 建立資料，跨幣別匯率由 createTransfer 連動產生，無紀錄則 resolveCurrencyRate 回傳 1
 - **輸入:**
   - 原始幣別
   - 基礎幣別
-  - 初始匯率
 - **寫入 CurrencyRate:**
   - **執行:**
-    - 新增一筆記錄至 `CurrencyRates` 表
+    - **IF** 該幣別對尚無紀錄:
+      - 新增一筆匯率值為 1 的記錄至 `CurrencyRates` 表
+    - **ELSE:**
+      - 不重複種入
 
 ---
 
