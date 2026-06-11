@@ -18,10 +18,13 @@
         - 基礎幣別設定
         - 貨幣清單
         - 匯率紀錄清單
+        - 語系設定
         - 時區設定
     - **元件條目順序:**
         - 前綴 magnify icon
         - 中央輸入框
+            - placeholder 文案 = 搜尋
+            - 各搜尋畫面共用同一通用文案，不逐畫面特化
         - 後綴 clear 動作
             - **IF** 輸入框 focus:
                 - 顯示
@@ -39,7 +42,7 @@
 
 - **autoFocus 規則:**
     - 搜尋頁進入時 autoFocus
-    - 設定型選擇頁不 autoFocus
+    - 其餘搜尋畫面進入時不 autoFocus
 
 - **Clear 動作:**
     - 僅 focus 時顯示
@@ -57,6 +60,8 @@
     - 各 screen spec 在搜尋列段落標註 `Search 模式: Bottom Pill`
     - 不重述 pill 結構
     - 不重述視覺定案
+    - 不重述 placeholder 文案
+    - 不重述 autoFocus 行為
 
 - **合規寫法:**
 
@@ -64,6 +69,4 @@
 ### 搜尋輸入區
 
 - Search 模式: Bottom Pill
-- placeholder = i18n 鍵 common.search
-- autoFocus 視 screen 需求
 ```

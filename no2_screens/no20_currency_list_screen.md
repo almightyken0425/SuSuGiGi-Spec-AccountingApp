@@ -12,12 +12,13 @@
 +--------------------------------+
 | <          Currencies          |
 +--------------------------------+
-| [ Search Currency... ]         |
-+--------------------------------+
-| USD  United States Dollar   >  |
-| TWD  New Taiwan Dollar      >  |
-| JPY  Japanese Yen           >  |
+| USD                         >  |
+| United States Dollar           |
+| TWD                         >  |
+| New Taiwan Dollar              |
 | ...                            |
++--------------------------------+
+| [ Search...                  ] |
 +--------------------------------+
 ```
 
@@ -34,7 +35,6 @@
 ### 搜尋列
 
 - Search 模式: Bottom Pill
-- placeholder = 貨幣關鍵字
 
 ### 貨幣列表
 
