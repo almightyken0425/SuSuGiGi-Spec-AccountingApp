@@ -39,11 +39,10 @@
 ### 貨幣列表
 
 - List 模式: A
-- 長 list 形態，row 自帶 hairline borderTop 形成邊到邊分隔
 - 貨幣項目
   - `alphabeticCode`
   - `name`
-  - 右側導航箭頭
+  - 後綴 chevron
 
 ---
 
@@ -57,3 +56,6 @@
 
 - **點按貨幣項目:**
   - 導航至 CurrencyDetailConfigScreen
+
+- **無搜尋結果:**
+  - 顯示空狀態：找不到結果
