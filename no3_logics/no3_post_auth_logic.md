@@ -2,74 +2,63 @@
 
 ## handlePostAuth 處理登入後初始化
 
-- 認證成功後，刷新 Premium 狀態並依雲端資料是否存在分派初始化路徑
-- 全 user 一致，不分付費層級
+- 認證成功後刷新 Premium 狀態，並依本機與雲端資料是否存在分派初始化路徑
+- 全 user 一致、無條件執行，不分付費層級
 - **執行:**
-  - 向 IAP 服務查詢最新購買憑證，更新本地 Premium 到期狀態
-  - 嘗試讀取 Firestore `users/{uid}` 文件
-  - **IF** 讀取成功且文件存在:
-    - 呼叫 syncSettingsFromCloud
-  - **ELSE** 文件不存在或讀取失敗:
-    - 呼叫 initializeNewUser
+  - 向 IAP 服務查詢最新購買憑證，更新本機 Premium 到期狀態
+  - **IF** 本機無此帳號的 Users 與 Settings 紀錄:
+    - 呼叫 initializeLocalUser
+  - 讀取 Firestore `users/{uid}` 文件的存在性
+  - **IF** 文件不存在:
+    - 呼叫 initializeCloudUser
+  - **ELSE:**
+    - 委派 PreferenceUploadLogic 的 uploadAllPreferences，上傳本機實際值並接受覆寫雲端
+  - 不再讀取並套用雲端 preference，不依文件存在與否決定是否下載
 
 ---
 
-## syncSettingsFromCloud 從雲端同步設定
+## initializeLocalUser 初始化本機使用者資料
 
-- 以 Last Write Wins 策略將雲端偏好設定同步至本機 Settings 表
-- **輸入:**
-  - Firestore `users/{uid}` 文件資料
-- **執行:**
-  - 取得 preferences 的 language、currency、timezone、theme、launchMode，及 updatedAt 作為遠端時間
-  - 讀取本機 Settings 表的 updatedOn 作為本機時間
-  - **IF** 遠端時間大於本機時間，或本地無資料:
-    - **寫入 Settings:**
-      - **執行:**
-        - 將雲端偏好覆寫至本機 Settings 表
-      - **欄位:**
-        - `language`
-        - `baseCurrencyId`
-        - `timeZone`
-        - `theme`
-        - `launchMode`
-        - `updatedOn`
-  - **ELSE** 本機時間大於遠端時間:
-    - 不覆寫本機設定，不執行任何動作
-- 由 BatchSyncLogic 與定期交易檢查呼叫
+- 依裝置 Locale 推導預設值，建立本機 Users 與 Settings 紀錄
+- **性質:**
+  - 純本機，無雲端動作
+- **決定預設值:**
+  - **執行:**
+    - 主要幣別:
+      - 從裝置 Locale 推導
+      - 若無則預設 TWD，並轉換為 Currency ID
+    - 語系:
+      - 從裝置 Locale 推導
+      - 若無則預設系統語言
+    - 時區:
+      - 讀取裝置時區
+    - 主題:
+      - 預設 Default
+    - 啟動模式:
+      - 預設 home
+- **建立本機資料:**
+  - **執行:**
+    - 新增記錄至 Users 表與 Settings 表
+  - **欄位:**
+    - `baseCurrencyId`: 依主要幣別決定
+    - `language`: 依語系決定
+    - `timeZone`: 依時區決定
+    - `theme`: Default
+    - `launchMode`: home
 
 ---
 
-## initializeNewUser 初始化新用戶
+## initializeCloudUser 建立雲端用戶文件
 
-- 依裝置 Locale 決定預設值，建立本機資料，並視 Premium 狀態決定是否同步至 Firestore
-- **執行:**
-  - **決定預設值:**
-    - **執行:**
-      - 主要幣別:
-        - 從裝置 Locale 取得
-        - 若無則預設 TWD，並轉換為 Currency ID
-      - 語系:
-        - 從裝置 Locale 取得
-        - 若無則預設系統語言
-      - 時區:
-        - 讀取裝置時區
-      - 主題:
-        - 預設 Default
-      - 啟動模式:
-        - 預設 home
-  - **建立本機資料:**
-    - **執行:**
-      - 新增記錄至 Users 表及 Settings 表
-    - **欄位:**
-      - `baseCurrencyId`: 依主要幣別決定
-      - `language`: 依語系決定
-      - `timeZone`: 依時區決定
-      - `theme`: Default
-      - `launchMode`: home
-  - **建立雲端用戶文件:**
-    - **執行:**
-      - 在 Firestore 建立 `users/{uid}` 文件
-    - **欄位:**
-      - `uid`、`email`、`provider`
-      - `preferences`
-      - `createdAt`
+- 在 Firestore 建立 `users/{uid}` 文件，preferences 取本機 Settings 實際值
+- 無條件建立，不分 Premium
+- **建立雲端用戶文件:**
+  - **執行:**
+    - 在 Firestore 建立 `users/{uid}` 文件
+    - preferences 欄位取本機 Settings 的實際值，而非寫死預設
+  - **欄位:**
+    - `uid`
+    - `email`
+    - `provider`
+    - `createdAt`
+    - `preferences`

@@ -9,9 +9,6 @@
   - 讀取本地快取的 Firebase Auth 狀態
   - **IF** 已登入:
     - 呼叫 runCoreBackgroundTasks，於背景執行核心維護任務
-    - 查詢本地快取的 Premium 權限狀態
-    - **IF** Premium 權限有效:
-      - 呼叫 runPremiumBackgroundTasks，於背景執行付費者同步任務
     - 呼叫 resolveLaunchDestination，取得初始落點與付費牆攔截結果
     - 導航至初始落點
     - **IF** 攔截付費牆:
@@ -33,20 +30,11 @@
   - **執行:**
     - 依 Schedules 表的排程設定，補產生所有尚未建立的 Transactions 與 Transfers 紀錄
     - 更新上次定期交易檢查日為當前日期
-
----
-
-## runPremiumBackgroundTasks 執行付費者背景任務
-
-- 依日期條件觸發批次雲端同步
-- **性質:**
-  - 非同步，不阻塞主流程
-- **批次同步自動觸發:**
-  - **條件:**
-    - 計算的現在時間晚於上次同步時間
+- **交易備份自動觸發:**
   - **執行:**
-    - 觸發批次同步流程
-    - 更新上次同步時間為當前時間
+    - 委派 TransactionBackupLogic 的 runBackup
+  - **理由:**
+    - 不重複冷卻時間判斷，閘控由 runBackup 自管
 
 ---
 

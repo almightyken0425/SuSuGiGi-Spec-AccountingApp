@@ -13,15 +13,15 @@
   - `theme`: String - Not Null, 主題設定，例如 light、dark、system
   - `launchMode`: String - Not Null, Default `home`, 啟動模式，可為 `home`、`expense`、`income`、`transfer`
   - `analyticsConsent`: Boolean - Not Null, Default `true`, 分析同意開關，控制記帳資料是否納入分析管線
-  - `lastSyncedAt`: Number | Null, Unix Timestamp ms - Nullable, 上次完成同步的時間；Null 代表尚未同步過
+  - `lastSyncedAt`: Number | Null, Unix Timestamp ms - Nullable, 上次完成交易備份上傳的時間，作為 Delta 篩選基準；Null 代表尚未上傳過，偏好上傳不更新此欄位
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
 
-**與 User Management 的關係**: 此表為 `users/{uid}/preferences` 的本地快取。
-- `language`、`timeZone`、`theme` 直接對應
-- `baseCurrencyId` 對應 `preferences.currency`，需進行 ID 與 ISO Code 雙向轉換
-- `analyticsConsent` 對應 `preferences.analyticsConsent`，預設 true
-- 需保持雙向同步
+**與 User Management 的關係**: 本機此表為偏好設定唯一真相；`users/{uid}/preferences` 為單向上傳鏡像，僅供資料分析維度，永不下載套用。
+- `language`、`timeZone`、`theme`、`launchMode`、`analyticsConsent` 直接對應上傳
+- `baseCurrencyId` 上傳時轉 ISO Code 寫入 `preferences.currency`，單向轉換不反向
+- 偏好設定屬裝置層級設定，不隨帳號跨裝置下載
+- 多裝置各自上傳，接受最後寫入覆寫
 
 ---
 

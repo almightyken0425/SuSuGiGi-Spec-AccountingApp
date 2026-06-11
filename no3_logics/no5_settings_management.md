@@ -20,20 +20,7 @@
   - 更新 `theme` 為目標主題識別碼
   - 從 THEMES 內建主題清單取得對應主題定義並套用至 App 的主題提供層
   - 非同步將 `theme` 寫入 `Settings` 表
-  - 呼叫 updateUserPreferences，帶入 theme 欄位為目標主題識別碼
-
----
-
-## updateUserPreferences 更新使用者偏好設定
-
-- 偏好設定的 Firestore 寫入統一透過此操作執行
-- **輸入:**
-  - 本次需變更的偏好設定欄位，未傳入的欄位不受影響
-- **執行:**
-  - 以逐欄 dot notation 方式更新 preferences，避免覆寫整個 preferences 物件
-  - 自動更新 updatedAt 為當前時間，無論傳入欄位數量
-  - **IF** Firestore 寫入失敗:
-    - 不拋出例外，錯誤僅記錄於 log
+  - 委派 PreferenceUploadLogic 的 uploadPreferences，帶入 theme 欄位為目標主題識別碼
 
 ---
 
@@ -43,7 +30,7 @@
   - 目標啟動模式
 - **執行:**
   - 更新 `Settings` 表中的 `launchMode` 為目標值
-  - 呼叫 updateUserPreferences，帶入 launchMode 欄位為目標值
+  - 委派 PreferenceUploadLogic 的 uploadPreferences，帶入 launchMode 欄位為目標值
 
 ---
 
@@ -53,7 +40,7 @@
   - 目標主要貨幣 ID
 - **執行:**
   - 更新 `Settings` 表中的 `baseCurrencyId` 為目標值
-  - 呼叫 updateUserPreferences，帶入 baseCurrencyId 欄位為目標值
+  - 委派 PreferenceUploadLogic 的 uploadPreferences，帶入 baseCurrencyId 欄位為目標值
 
 ---
 
@@ -64,7 +51,7 @@
 - **執行:**
   - 更新 `Settings` 表中的 `language` 為目標值
   - 切換 App 執行期的介面語系
-  - 呼叫 updateUserPreferences，帶入 language 欄位為目標值
+  - 委派 PreferenceUploadLogic 的 uploadPreferences，帶入 language 欄位為目標值
 
 ---
 
@@ -74,7 +61,7 @@
   - 目標時區 IANA 名稱
 - **執行:**
   - 更新 `Settings` 表中的 `timeZone` 為目標值
-  - 呼叫 updateUserPreferences，帶入 timeZone 欄位為目標值
+  - 委派 PreferenceUploadLogic 的 uploadPreferences，帶入 timeZone 欄位為目標值
 
 ---
 
@@ -84,7 +71,7 @@
   - 目標同意狀態
 - **執行:**
   - 更新 `Settings` 表中的 `analyticsConsent` 為目標值
-  - 呼叫 updateUserPreferences，帶入 analyticsConsent 欄位為目標值
+  - 委派 PreferenceUploadLogic 的 uploadPreferences，帶入 analyticsConsent 欄位為目標值
 
 ---
 
