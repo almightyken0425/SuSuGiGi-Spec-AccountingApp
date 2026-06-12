@@ -9,6 +9,7 @@
   - 讀取本地快取的 Firebase Auth 狀態
   - **IF** 已登入:
     - 呼叫 runCoreBackgroundTasks，於背景執行核心維護任務
+    - 等待 PremiumLogic 的訂閱狀態就緒
     - 呼叫 resolveLaunchDestination，取得初始落點與付費牆攔截結果
     - 導航至初始落點
     - **IF** 攔截付費牆:
@@ -60,6 +61,7 @@
 ## resolveLaunchDestination 解析啟動導航目的地
 
 - 依啟動模式與訂閱授權，回傳初始落點與是否攔截付費牆
+- 於 PremiumLogic 訂閱狀態就緒後才解析，避免以首次更新前的佔位 LEVEL_0 誤判授權
 - 啟動模式指向 editor 時，先經 canUserPerformAction 閘控
 - 訂閱受限不變動啟動模式，僅以付費牆攔截當次啟動
 - **執行:**
