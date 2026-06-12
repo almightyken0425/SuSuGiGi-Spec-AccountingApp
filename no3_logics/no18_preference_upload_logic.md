@@ -41,7 +41,14 @@
   - **IF** 無登入使用者:
     - 跳過雲端寫入
   - **ELSE:**
-    - 以逐欄 dot notation 更新 preferences，避免覆寫整個 preferences 物件
+    - 逐欄將本機偏好欄位映射為遠端欄位後，以 dot notation 更新 preferences，避免覆寫整個 preferences 物件
+    - 欄位映射與值轉換規則:
+      - `baseCurrencyId` 上傳為遠端 `currency`，值由數值幣別 ID 轉為 ISO 4217 代碼字串，無法解析則略過該欄位
+      - `timeZone` 上傳為遠端 `timezone`，值直送
+      - `launchMode` 值正規化，非 `home` / `expense` / `income` / `transfer` 一律改為 `home`
+      - `analyticsConsent` 遷移自舊資料的 Null 視為 `true`，代表已同意
+      - `theme`、`language` 欄位名與值皆直送
+      - 任一欄位轉換後值為空、Null 或 undefined 者，略過不寫入
     - 自動更新文件根層 updatedAt 為當下時間，無論傳入欄位數量
     - updatedAt 僅標記文件最後寫入時間，無消費端，不參與衝突解決
     - **IF** Firestore 寫入失敗:
