@@ -53,12 +53,16 @@
 
 ## generateMissingInstances 補產生實例
 
-- 設計為於使用者登入或 App 啟動後呼叫，補齊離線期間到期而尚未產生的實例。createSchedule 僅補至建立當下，後續到期實例倚賴此操作補齊。
+- 設計為於使用者登入或 App 啟動後呼叫，補齊離線期間到期而尚未產生的實例。
 - 須具重入安全：重複呼叫或並行呼叫時，同一排程同一 instanceDate 至多產生一筆實例。
+- 同一使用者的並行呼叫共用同一進行中的執行，不重複起跑。
+- **輸入:**
+  - 使用者識別碼
 - **執行:**
   - 取得當前時間作為補產生截止點
-  - 遍歷所有 `Schedules`，對每筆排程逐一處理，單筆排程失敗時跳過該筆、不中斷其餘排程：
-    - 查詢此排程已產生的最後一筆實例：
+  - 查詢 `Schedules` 表中屬於此使用者的排程，依 `userId` 過濾
+  - 對每筆排程逐一處理，單筆排程失敗時跳過該筆、不中斷其餘排程：
+    - 查詢此排程已產生的最後一筆實例，包含已軟刪除的實例：
       - **IF** 已有實例:
         - 取最後實例的 `scheduleInstanceDate` 為起點，依排程的 `frequency` 與 `interval` 推算下一個 instanceDate
       - **IF** 尚無實例:
@@ -70,5 +74,6 @@
         - 結束此排程的迴圈
       - **IF** 此排程已存在對應此 instanceDate 的實例:
         - 跳過，不重複產生此 instanceDate
-      - 依排程類型呼叫 createTransfer 或 createTransaction，帶入 instanceDate 為 transactionDate、scheduleId 與 scheduleInstanceDate
+        - 已軟刪除的實例視為已存在
+      - 依排程類型呼叫 createTransfer 或 createTransaction，帶入 instanceDate 為 `date`、`scheduleId` 與 `scheduleInstanceDate`
       - 依 `frequency` 與 `interval` 推算下一個 instanceDate

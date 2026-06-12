@@ -40,6 +40,7 @@
   - 目標主要貨幣 ID
 - **執行:**
   - 更新 `Settings` 表中的 `baseCurrencyId` 為目標值
+  - 為每個與新主要貨幣不同的既有帳戶幣別，呼叫 createInitialCurrencyRate 種入對新主要貨幣的佔位匯率；已有紀錄則略
   - 委派 PreferenceUploadLogic 的 uploadPreferences，帶入 baseCurrencyId 欄位為目標值
 
 ---
