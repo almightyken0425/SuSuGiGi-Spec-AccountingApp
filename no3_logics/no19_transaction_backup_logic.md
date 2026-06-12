@@ -37,6 +37,9 @@
       - 跳過本次上傳，等下次 UTC+0 跨日重置
     - **ELSE:**
       - 探測 Firestore 端是否存在此 user 資料
+        - 探測方式：查遠端 transactions 集合，最多取 1 筆，非空即視為遠端已有資料
+        - 以單一集合近似判定，不遍歷其餘集合
+        - 探測失敗：保守視為遠端無資料，續走 runInitialBackup
       - **IF** 遠端無資料:
         - 委派至 runInitialBackup
       - **ELSE:**
@@ -72,6 +75,9 @@
   - 非同步，需處理網路錯誤與 Firestore 配額錯誤
 - **執行:**
   - 以 Settings 表 lastSyncedAt 為 Delta 篩選基準，讀取自上次完成同步後的變更，涵蓋 transactions、transfers、accounts、categories、currency_rates、schedules
-  - 依集合分批寫入 Firestore users/{uid}/{collection}，每批 500 筆
-  - 委派至 QuotaManagementLogic 的 incrementQuota，累計上傳筆數至當日寫入配額
-  - 寫入完成後更新 Settings 表 lastSyncedAt 為當下時間
+  - **IF** 無任何變更:
+    - 跳過上傳，不更新 lastSyncedAt，RETURN
+  - **ELSE:**
+    - 依集合分批寫入 Firestore users/{uid}/{collection}，每批 500 筆
+    - 委派至 QuotaManagementLogic 的 incrementQuota，累計上傳筆數至當日寫入配額
+    - 寫入完成後更新 Settings 表 lastSyncedAt 為當下時間
