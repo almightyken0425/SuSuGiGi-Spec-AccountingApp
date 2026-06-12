@@ -18,11 +18,10 @@
 ## logout 登出
 
 - **執行:**
-  - 清除本地 Premium 快取狀態
   - 保留本地帳務資料，不執行清除（清除僅在 handleReLogin 偵測到不同帳號時，依使用者選擇執行）
   - 觸發 Firebase Auth 登出，清除本地登入憑證
   - **IF** Firebase Auth 登出失敗:
-    - 強制清除本地 Firebase session token，下次啟動時以 auth 狀態重新驗證
+    - 仍將本地登入狀態清為登出
 
 ---
 
