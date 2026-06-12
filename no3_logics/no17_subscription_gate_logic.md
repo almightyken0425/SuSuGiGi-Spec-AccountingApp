@@ -11,7 +11,7 @@
 
 - 跨 Module 的 LEVEL 商業定義: `no1_product_initiation/no3_business_model.md`
 - 記帳 App 視角下各 LEVEL 可用能力的白話總覽: `no2_product_planning/no2_product_map/app/payment.md` 的 LEVEL 能力清單
-- triggerCloudBackup 與 triggerMultiDeviceSync 拆解依據: `no99_archive/r1_decision_matrix.md` R1 Round 5 拍板
+- triggerCloudBackup 拆解依據: `no99_archive/r1_decision_matrix.md` R1 Round 5 拍板。triggerMultiDeviceSync 已隨 preference 只上傳廢止，跨裝置走匯出匯入由 importData 與 exportData 承載
 - 本檔的規則表與上述三者對齊，任一變更時需同步更新
 
 ---
@@ -26,7 +26,6 @@
     - createTransfer
   - 禁止動作:
     - createRecurringTransaction
-    - triggerMultiDeviceSync
     - importData
     - exportData
     - manageCurrencyRate
@@ -57,7 +56,6 @@
   - createTransfer
   - createRecurringTransaction
   - triggerCloudBackup
-  - triggerMultiDeviceSync
   - importData
   - exportData
   - manageCurrencyRate
@@ -96,11 +94,6 @@
       - **回傳:** 允許
   - **IF** 動作識別碼為 triggerCloudBackup:
     - **回傳:** 允許
-  - **IF** 動作識別碼為 triggerMultiDeviceSync:
-    - **IF** 當前訂閱等級為 LEVEL_0:
-      - **回傳:** 禁止
-    - **ELSE:**
-      - **回傳:** 允許
   - **IF** 動作識別碼為 importData:
     - **IF** 當前訂閱等級為 LEVEL_0:
       - **回傳:** 禁止

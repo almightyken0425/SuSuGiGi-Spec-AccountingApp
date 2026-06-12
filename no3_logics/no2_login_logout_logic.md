@@ -32,8 +32,8 @@
   - 非同步，需處理網路錯誤
 - **執行:**
   - **IF** 與本地快取帳號相同:
-    - 讀取 Firestore 偏好設定，以雲端設定覆蓋本地設定
-    - 觸發批次同步流程
+    - 委派至 PreferenceUploadLogic 的 uploadAllPreferences
+    - 委派至 TransactionBackupLogic 的 runBackup
   - **ELSE:**
     - 通知使用者本地存有其他帳號資料，依其選擇保留或清除後繼續
     - 清除為不可復原操作：本機清空後無法復原，雲端備份不會自動還原，故須使用者明示選擇，不自動清除
