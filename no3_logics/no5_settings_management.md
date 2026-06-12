@@ -6,7 +6,7 @@
 - **執行:**
   - 讀取 `Settings` 表中的 `theme`
   - **IF** `theme` 不存在:
-    - 依系統深淺色決定初始主題，預設為 `theme_light_default`
+    - 採用 THEMES 清單的固定預設主題，識別碼 `theme1`
   - 從 THEMES 內建主題清單取得對應主題定義
   - 將主題定義套用至 App 的主題提供層
 
@@ -99,3 +99,5 @@
   - 查找 `CurrencyConfig` 表中 `userId` 與 `currencyId` 對應的既有紀錄
   - **IF** 紀錄存在:
     - 將該紀錄的 `decimalPlaces` 設為 Null，回歸該貨幣預設位數
+  - **ELSE:**
+    - 新增一筆紀錄至 `CurrencyConfig` 表，設定 `currencyId`、`decimalPlaces` 為 Null、`useThousandsUnit` 為 false
