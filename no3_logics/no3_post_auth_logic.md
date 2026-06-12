@@ -2,10 +2,10 @@
 
 ## handlePostAuth 處理登入後初始化
 
-- 認證成功後刷新 Premium 狀態，並依本機與雲端資料是否存在分派初始化路徑
+- 認證成功後依本機與雲端資料是否存在分派初始化路徑
 - 全 user 一致、無條件執行，不分付費層級
+- Premium 狀態刷新由 PremiumLogic 的 refreshStatus 承載，不在本流程內，登入不等待 IAP 服務回應
 - **執行:**
-  - 向 IAP 服務查詢最新購買憑證，更新本機 Premium 到期狀態
   - **IF** 本機無此帳號的 Users 與 Settings 紀錄:
     - 呼叫 initializeLocalUser
   - 讀取 Firestore `users/{uid}` 文件的存在性
