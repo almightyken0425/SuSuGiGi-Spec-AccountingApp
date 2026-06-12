@@ -42,7 +42,8 @@
     - 跳過雲端寫入
   - **ELSE:**
     - 以逐欄 dot notation 更新 preferences，避免覆寫整個 preferences 物件
-    - 自動更新 preferences.updatedAt 為當下時間，無論傳入欄位數量
+    - 自動更新文件根層 updatedAt 為當下時間，無論傳入欄位數量
+    - updatedAt 僅標記文件最後寫入時間，無消費端，不參與衝突解決
     - **IF** Firestore 寫入失敗:
       - 僅記 log，不阻塞 UI
 
