@@ -128,9 +128,9 @@ dialog 月選擇子模式:
 ```
 ### 日期選擇區
 
-- 日期選擇器模式: Calendar Dialog · Datetime
+- 日期選擇器模式: Datetime
 ```
 
 ```
-- 結束日期選擇器模式: Calendar Dialog · Date-only
+- 結束日期選擇器模式: Date-only
 ```

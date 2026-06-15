@@ -48,17 +48,16 @@
 
 - **輸入:**
   - 當前使用者訂閱等級
-  - 動作識別碼
-- **動作識別碼:**
-  - createAccount
-  - createCategory
-  - createTransaction
-  - createTransfer
-  - createRecurringTransaction
-  - triggerCloudBackup
-  - importData
-  - exportData
-  - manageCurrencyRate
+  - 動作識別碼，合法值為以下其一:
+    - createAccount
+    - createCategory
+    - createTransaction
+    - createTransfer
+    - createRecurringTransaction
+    - triggerCloudBackup
+    - importData
+    - exportData
+    - manageCurrencyRate
 - **性質:**
   - 純本地計算，可讀取當前使用者的帳戶總數與類別總數
 - **執行:**
@@ -104,7 +103,7 @@
       - **回傳:** 禁止
     - **ELSE:**
       - **回傳:** 允許
-  - **IF** 動作識別碼為 createTransaction 或 createTransfer:
+  - **ELSE:**
     - **IF** 當前訂閱等級為 LEVEL_0:
       - 讀取當前使用者的帳戶總數與類別總數
       - **IF** 帳戶總數已達 3 或類別總數已達 10:

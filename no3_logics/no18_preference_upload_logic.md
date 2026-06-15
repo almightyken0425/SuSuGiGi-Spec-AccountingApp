@@ -48,7 +48,7 @@
       - `launchMode` 值正規化，非 `home` / `expense` / `income` / `transfer` 一律改為 `home`
       - `analyticsConsent` 遷移自舊資料的 Null 視為 `true`，代表已同意
       - `theme`、`language` 欄位名與值皆直送
-      - 任一欄位轉換後值為空、Null 或 undefined 者，略過不寫入
+      - 任一欄位轉換後值為空值或 Null 者，略過不寫入
     - 自動更新文件根層 updatedAt 為當下時間，無論傳入欄位數量
     - updatedAt 僅標記文件最後寫入時間，無消費端，不參與衝突解決
     - **IF** Firestore 寫入失敗:

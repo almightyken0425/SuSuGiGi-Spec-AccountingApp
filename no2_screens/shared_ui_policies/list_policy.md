@@ -110,7 +110,7 @@
     - D 模式停用，避免與拖拉手勢衝突
 
 - **Disabled 樣式:**
-    - 整列是否套 disabled 視覺弱化由 caller 決定
+    - 整列是否套 disabled 視覺弱化由引用端決定
     - 按下回饋停用
 
 - **Selected 樣式:**
