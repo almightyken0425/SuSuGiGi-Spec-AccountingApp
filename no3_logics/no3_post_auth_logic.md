@@ -28,12 +28,14 @@
       - 從裝置 Locale 推導
       - 若無則預設 TWD，並轉換為 Currency ID
     - 語系:
-      - 從裝置 Locale 推導
-      - 若無則預設系統語言
+      - 從裝置 Locale 推導，與支援語系清單比對
+      - 比對成功則採該語系
+      - 比對未匹配則 fallback 預設 en
+      - 不做語族內 fallback，避免繁簡混雜或非預期語系出現
     - 時區:
       - 讀取裝置時區
     - 主題:
-      - 預設 Default
+      - 預設 theme1
     - 啟動模式:
       - 預設 home
 - **建立本機資料:**
@@ -43,7 +45,7 @@
     - `baseCurrencyId`: 依主要幣別決定
     - `language`: 依語系決定
     - `timeZone`: 依時區決定
-    - `theme`: Default
+    - `theme`: theme1
     - `launchMode`: home
 
 ---

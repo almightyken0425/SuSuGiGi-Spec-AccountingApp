@@ -51,7 +51,7 @@
         - 副標可選
         - trailing 勾選圖示
     - **B-2 元件條目順序:**
-        - 預覽 children slot
+        - 預覽區
         - 名稱
         - 勾選圖示 overlay
     - **互動:**
@@ -67,9 +67,6 @@
         - 不使用 勾選圖示 overlay
         - 點 tile 切換選取狀態
         - 最後一個 selected 不可取消
-        - **承載容器二選一:**
-            - 每格獨立群組卡片：適用單選項獨立性強的場景，例如 HomeFilter 帳戶
-            - 共用單一群組卡片：適用網格選一風格，例如 ThemeSettings
 
 - **模式 C — 簡化資料列表:**
     - **適用:**
@@ -90,7 +87,7 @@
     - **互動:**
         - 長按拖拉排序
         - 點擊整列導向編輯
-        - 不啟用按下回饋，避免與拖拉手勢衝突
+        - 停用按下回饋，避免與拖拉手勢衝突
 
 - **Custom Layout 例外:**
     - **適用:**
@@ -110,12 +107,11 @@
 
 - **按下回饋:**
     - A / B 模式啟用
-    - D 模式禁用，避免與拖拉手勢衝突
+    - D 模式停用，避免與拖拉手勢衝突
 
 - **Disabled 樣式:**
-    - 主標降為次要色
-    - 整列可由 caller 視需求降透明
-    - 點擊回饋停用
+    - 整列是否套 disabled 視覺弱化由 caller 決定
+    - 按下回饋停用
 
 - **Selected 樣式:**
     - B-1 單列 trailing 顯勾選圖示
@@ -150,7 +146,7 @@
 
 - List 模式: A
 - 列項
-  - leading icon = 設定圖
+  - leading icon 槽位
   - 主標 = i18n 鍵 settings.manage_categories
   - 後綴 chevron 跳轉至 CategoryList
 ```
