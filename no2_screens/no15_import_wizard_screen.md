@@ -47,7 +47,7 @@
 │ [ date                       v ] │
 │ 金額 *                           │
 │ [ amount                     v ] │
-│ 分類 *                           │
+│ 類別 *                           │
 │ [ category                   v ] │
 │ 帳戶 *                           │
 │ [ account                    v ] │

@@ -67,9 +67,12 @@ Spec 變動時須檢查對應的 Design 視覺、Impl 實作與上游 Product Ma
 
 `no2_screens/shared_ui_policies/` 承載跨 screen 共用的 UI 規範。screen spec 標模式代號引用，不重述細節。
 
-- `header_policy.md`：導航列模式 A 列表頁 / B 編輯頁 / C 表單 modal / D 純展示 modal / E 主畫面儀表板
+- `header_policy.md`：導航列模式 A 列表頁 / B 編輯頁 / C 表單 modal / D 純展示 modal / E 主畫面儀表板 / F 多步驟精靈
 - `list_policy.md`：列表模式 A 導航 / B 選擇（B-1 單列、B-2 網格）/ C 簡化資料 / D 拖拉 / Custom 例外
 - `search_policy.md`：搜尋模式 Bottom Pill 底部固定 dock
+- `date_picker_policy.md`：日期選擇器模式 Datetime 日期加時間 / Date-only 純日期
+- `delete_button_policy.md`：editor 類 screen 共用刪除按鈕，統一標籤與觸發行為
+- `undo_bar_policy.md`：全域底部復原列，screen 觸發處標 `呼叫 showUndo`，狀態機由 no3_logics 的 UndoLogic 承載
 
 ---
 

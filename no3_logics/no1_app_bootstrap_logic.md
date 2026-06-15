@@ -76,7 +76,7 @@
       - **回傳:**
         - 初始落點 HomeScreen
         - 攔截付費牆
-    - **IF** 回傳允許:
+    - **ELSE:**
       - **IF** launchMode 為 expense:
         - **回傳:**
           - 初始落點 TransactionEditorScreen 支出模式
@@ -91,7 +91,7 @@
       - **回傳:**
         - 初始落點 HomeScreen
         - 攔截付費牆
-    - **IF** 回傳允許:
+    - **ELSE:**
       - **回傳:**
         - 初始落點 TransferEditorScreen
         - 不攔截付費牆

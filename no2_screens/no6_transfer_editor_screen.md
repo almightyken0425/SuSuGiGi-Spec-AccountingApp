@@ -45,7 +45,7 @@
 
 ### 日期選擇區
 
-- 日期選擇器模式: Calendar Dialog · Datetime
+- 日期選擇器模式: Datetime
 - 定期切換按鈕
   - **IF** 此筆轉帳屬於某排程:
     - 啟用視覺狀態
