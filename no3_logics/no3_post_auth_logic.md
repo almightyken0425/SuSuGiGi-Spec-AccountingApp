@@ -3,7 +3,7 @@
 ## handlePostAuth 處理登入後初始化
 
 - 認證成功後依本機與雲端資料是否存在分派初始化路徑
-- 全 user 一致、無條件執行，不分付費層級
+- 全 user 一致、無條件執行，不分訂閱等級
 - Premium 狀態刷新由 PremiumLogic 的 refreshStatus 承載，不在本流程內，登入不等待 IAP 服務回應
 - **執行:**
   - **IF** 本機無此帳號的 Users 與 Settings 紀錄:
@@ -24,7 +24,7 @@
   - 純本機，無雲端動作
 - **決定預設值:**
   - **執行:**
-    - 主要幣別:
+    - 主要貨幣:
       - 從裝置 Locale 推導
       - 若無則預設 TWD，並轉換為 Currency ID
     - 語系:
@@ -42,7 +42,7 @@
   - **執行:**
     - 新增記錄至 Users 表與 Settings 表
   - **欄位:**
-    - `baseCurrencyId`: 依主要幣別決定
+    - `baseCurrencyId`: 依主要貨幣決定
     - `language`: 依語系決定
     - `timeZone`: 依時區決定
     - `theme`: theme1
@@ -53,7 +53,7 @@
 ## initializeCloudUser 建立雲端用戶文件
 
 - 在 Firestore 建立 `users/{uid}` 文件，preferences 取本機 Settings 實際值
-- 無條件建立，不分 Premium
+- 無條件建立，不分訂閱等級
 - **建立雲端用戶文件:**
   - **執行:**
     - 在 Firestore 建立 `users/{uid}` 文件

@@ -9,7 +9,7 @@
     - `iconId` 必須引用 `tags` 含 `account` 的 `IconDefinitions` 記錄
   - **執行:**
     - 新增一筆記錄至 `Accounts` 表
-- **IF** 幣別非基礎幣別:
+- **IF** 幣別非主要貨幣:
   - 呼叫 createInitialCurrencyRate 種入佔位匯率
 
 ## updateAccount 更新帳戶
