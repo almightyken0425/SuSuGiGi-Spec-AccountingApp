@@ -10,7 +10,7 @@
     - 於 `Schedules` 表建立一筆新記錄
 - **產生首筆交易:**
   - **執行:**
-    - **IF** TYPE 為 Transfer:
+    - **IF** `isTransfer` 為 true:
       - 呼叫 createTransfer，帶入 scheduleId 與 scheduleInstanceDate
     - **ELSE:**
       - 呼叫 createTransaction，帶入 scheduleId 與 scheduleInstanceDate

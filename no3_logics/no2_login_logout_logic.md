@@ -34,5 +34,20 @@
     - 委派至 PreferenceUploadLogic 的 uploadAllPreferences
     - 委派至 TransactionBackupLogic 的 runBackup
   - **ELSE:**
-    - 通知使用者本地存有其他帳號資料，依其選擇保留或清除後繼續
-    - 清除為不可復原操作：本機清空後無法復原，雲端備份不會自動還原，故須使用者明示選擇，不自動清除
+    - 通知使用者本地存有其他帳號資料，清除為不可復原操作，須明示選擇保留或清除、不自動清除
+    - **IF** 使用者選擇清除:
+      - 委派至 clearLocalData，清除前一帳號的本機資料
+    - **ELSE:**
+      - 保留本機資料，直接繼續
+
+---
+
+## clearLocalData 清除本機資料
+
+- 換帳號選擇清除時呼叫，硬重置整個本機資料庫；與資料管理的 resetAllData 軟刪刻意不同
+- **性質:**
+  - 非同步
+- **執行:**
+  - 清空本機資料庫全部紀錄，不分 userId
+  - 採硬重置直接清空，不逐筆標記刪除，故不傳播雲端刪除標記；換帳號只清本機，不可動前一帳號的雲端資料
+  - 清除後由 handlePostAuth 重建新帳號的 User 與 Settings

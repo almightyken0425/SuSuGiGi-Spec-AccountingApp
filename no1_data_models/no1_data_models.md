@@ -18,6 +18,7 @@
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
 
 **與 User Management 的關係**: 本機此表為偏好設定唯一真相；`users/{uid}/preferences` 為單向上傳鏡像，僅供資料分析維度，永不下載套用。
+- 整份 `users/{uid}` 雲端文件含 `provider`、文件根層 `updatedAt` 等頂層欄位的形狀權威屬 User Management module 的 Users 資料模型，本 module 不重複承載定義
 - `language`、`timeZone`、`theme`、`launchMode`、`analyticsConsent` 直接對應上傳
 - `baseCurrencyId` 上傳時轉 ISO Code 寫入 `preferences.currency`，單向轉換不反向
 - 偏好設定屬裝置層級設定，不隨帳號跨裝置下載
@@ -204,18 +205,34 @@
 ### PremiumContext Local State
 
 - **說明:**
-  - 執行期 Premium 等級狀態；IAP 原始資料快取於 User 實體的 IAP 欄位
+  - 執行期 Premium 等級狀態；IAP 原始資料存於 User 實體的 IAP 欄位，離線授權快取另見 PremiumCache
+  - 各 LEVEL 在記帳 App 視角下的可用能力白話總覽，見 `no2_product_planning/no2_product_map/app/payment.md` 的 LEVEL 能力清單
+  - 動作識別碼與授權判斷邏輯，見 `no4_product_specs/no2_accounting_app/no3_logics/no17_subscription_gate_logic.md`
 - **欄位:**
-  - `currentTier`: String - Not Null, 當前 Premium 等級，僅涵蓋 IAP 可解析的範圍
+  - `currentTier`: Number - Not Null, 當前 Premium 等級，值域對應 LEVEL_0..LEVEL_B（PlanTier 數值 enum），僅涵蓋 IAP 可解析的範圍
     - `LEVEL_0`
     - `LEVEL_1`
     - `LEVEL_2`
     - LEVEL_3、LEVEL_B 非 IAP 解析持有的 runtime tier，故不列入
     - **來源:**
       - 從 IAP 服務回傳的有效訂閱列表解析
-    - **能力規範:**
-      - 記帳 App 視角下各 LEVEL 可用能力的白話總覽見 `no2_product_planning/no2_product_map/app/payment.md` 的 LEVEL 能力清單
-      - 動作識別碼與授權判斷邏輯見 `no4_product_specs/no2_accounting_app/no3_logics/no17_subscription_gate_logic.md`
+  - `isPremiumLoaded`: Boolean - Not Null, 訂閱狀態是否已就緒；首次解析完成前為 false，期間不以佔位的 LEVEL_0 判定授權
+    - 初值 false，首次更新前 currentTier 為佔位 LEVEL_0、不可信
+    - 線上更新或離線回退任一完成後設為 true
+    - 登出時維持 true，使登出後不再等待訂閱解析
+
+---
+
+### PremiumCache Local State
+
+- **說明:**
+  - 離線可讀的本地授權快取；付費者離線時依此維持訂閱等級，不誤降為 LEVEL_0
+  - 載體為 AsyncStorage，鍵名 `premium_status_cache`
+  - 線上更新成功時寫入，登入態消失或解析為非付費時清除
+  - 為 IAP 解析後的本地授權狀態，與 User 實體 `iapActivePurchasesJson` 的平台原始回傳鏡像職責不同
+- **欄位:**
+  - `tier`: Number - Not Null, 快取的訂閱等級，值域對應 LEVEL_0..LEVEL_B，僅涵蓋 IAP 可解析範圍 LEVEL_0、LEVEL_1、LEVEL_2
+  - `expirationDate`: Number | Null, Unix Timestamp ms - Nullable, 訂閱到期日；Null 代表無期限，到期日早於或等於當下時間視為失效
 
 ---
 

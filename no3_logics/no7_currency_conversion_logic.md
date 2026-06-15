@@ -98,3 +98,63 @@
       - **回傳:** 查找適用匯率後換算為基礎幣別的收入金額
     - **ELSE:**
       - **回傳:** 以 amountTo 顯示為收入
+
+---
+
+## getMinorUnits 取貨幣 minorUnits
+
+- 給定貨幣，回傳該貨幣定義的 minorUnits 小數位數
+- 純顯示用途，不影響儲存縮放
+- 未知貨幣 fallback 為 2，不對任何貨幣設特例
+- **輸入:**
+  - 目標貨幣
+- **性質:**
+  - 純本地計算，不發出網路請求
+- **執行:**
+  - **IF** 該貨幣在 Currencies 中有定義:
+    - **回傳:** 該貨幣定義的 `minorUnits`
+  - **ELSE:**
+    - **回傳:** 預設位數 2
+
+---
+
+## getCurrencyConfig 解析貨幣顯示設定
+
+- 給定貨幣，回傳顯示用的 decimals 與 useThousandsUnit 兩項設定
+- decimals 優先序：使用者 CurrencyConfig 的 `decimalPlaces` > TWD UX 例外 0 > 該貨幣 minorUnits
+- TWD 例外 0 是本操作內為台灣使用者偏好設的顯示預設，非 getMinorUnits 推導；TWD 的 minorUnits 實為 2，此例外會被使用者設定的 `decimalPlaces` 覆寫
+- **輸入:**
+  - 目標貨幣
+- **性質:**
+  - 純本地計算，不發出網路請求
+- **執行:**
+  - **IF** 該貨幣無對應 id:
+    - **回傳:** decimals 2 與 useThousandsUnit 關閉
+  - **ELSE:**
+    - 取該貨幣的 minorUnits 作為 decimals 起始值
+    - **IF** 該貨幣的 CurrencyConfig 存在且 `decimalPlaces` 非 Null:
+      - decimals 改取 `decimalPlaces`
+    - **IF** 目標貨幣為 TWD 且 `decimalPlaces` 為 Null:
+      - decimals 改為 0
+    - useThousandsUnit 取該貨幣 CurrencyConfig 的 `useThousandsUnit`，無 CurrencyConfig 時為關閉
+    - **回傳:** decimals 與 useThousandsUnit
+
+---
+
+## formatCurrency 依幣別格式化金額
+
+- 將整數縮放儲存值還原為依該幣別顯示設定格式化的顯示字串，作為各介面金額顯示的單一來源
+- decimals 與 useThousandsUnit 不由呼叫端傳入，內部以 currencyCode 經 getCurrencyConfig 取得
+- **輸入:**
+  - 整數縮放金額
+  - 目標幣別
+- **性質:**
+  - 純本地計算，不發出網路請求
+- **執行:**
+  - 以目標幣別經 getCurrencyConfig 取得 decimals 與 useThousandsUnit
+  - **IF** useThousandsUnit 啟用:
+    - 整數縮放金額先除以一千，進入以千為單位的 K 顯示模式
+  - 結果再除以一萬還原為主單位數值，對齊固定的 STORAGE_DECIMALS 四位縮放
+  - 依 decimals 格式化為顯示字串
+- **回傳:**
+  - 格式化後的金額顯示字串
