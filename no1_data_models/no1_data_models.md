@@ -209,7 +209,7 @@
   - 各 LEVEL 在記帳 App 視角下的可用能力白話總覽，見 `no2_product_planning/no2_product_map/app/payment.md` 的 LEVEL 能力清單
   - 動作識別碼與授權判斷邏輯，見 `no4_product_specs/no2_accounting_app/no3_logics/no17_subscription_gate_logic.md`
 - **欄位:**
-  - `currentTier`: Number - Not Null, 當前 Premium 等級，值域對應 LEVEL_0..LEVEL_B（PlanTier 數值 enum），僅涵蓋 IAP 可解析的範圍
+  - `currentTier`: Number - Not Null, 當前 Premium 等級，值域對應 LEVEL_0..LEVEL_B，僅涵蓋 IAP 可解析的範圍
     - `LEVEL_0`
     - `LEVEL_1`
     - `LEVEL_2`
@@ -227,7 +227,6 @@
 
 - **說明:**
   - 離線可讀的本地授權快取；付費者離線時依此維持訂閱等級，不誤降為 LEVEL_0
-  - 載體為 AsyncStorage，鍵名 `premium_status_cache`
   - 線上更新成功時寫入，登入態消失或解析為非付費時清除
   - 為 IAP 解析後的本地授權狀態，與 User 實體 `iapActivePurchasesJson` 的平台原始回傳鏡像職責不同
 - **欄位:**
