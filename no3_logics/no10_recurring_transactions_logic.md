@@ -67,6 +67,11 @@
         - 取最後實例的 `scheduleInstanceDate` 為起點，依排程的 `frequency` 與 `interval` 推算下一個 instanceDate
       - **IF** 尚無實例:
         - 取 `startOn` 為起點 instanceDate
+    - **MONTHLY 與 YEARLY 的 instanceDate 推算須避免日號漂移:**
+      - 推算下一個 instanceDate 時，日號一律錨定 `startOn` 的原始日號
+      - 僅當目標月份天數不足以容納原始日號時，才夾到該月最後一天；例如原始日號為 31、目標為 2 月時夾為 28 或 29
+      - 夾短只在當期生效、不得固化：下一期仍從原始日號重新推算，不以被夾短後的日號為基準
+      - 此規則同時適用於已有實例時的起點推算，以及迴圈內的下一期推算
     - 從推算之 instanceDate 起迴圈：
       - **IF** instanceDate 晚於當前時間:
         - 結束此排程的迴圈
