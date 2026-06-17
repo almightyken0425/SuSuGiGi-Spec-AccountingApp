@@ -203,7 +203,7 @@
   - **IF** 回傳禁止:
     - 導航至 PaywallScreen
   - **ELSE:**
-    - 帶入當前報表日期
+    - 帶入今天日期
     - 導航至 TransactionEditorScreen，支出模式
 
 - **點按新增收入按鈕:**
@@ -211,7 +211,7 @@
   - **IF** 回傳禁止:
     - 導航至 PaywallScreen
   - **ELSE:**
-    - 帶入當前報表日期
+    - 帶入今天日期
     - 導航至 TransactionEditorScreen，收入模式
 
 - **點按新增轉帳按鈕:**
@@ -219,7 +219,7 @@
   - **IF** 回傳禁止:
     - 導航至 PaywallScreen
   - **ELSE:**
-    - 帶入當前報表日期
+    - 帶入今天日期
     - 導航至 TransferEditorScreen
 
 - **水平滑動分頁:**
