@@ -11,8 +11,7 @@
 
 - 跨 Module 的 LEVEL 商業定義: `no1_product_initiation/no3_business_model.md`
 - 記帳 App 視角下各 LEVEL 可用能力的白話總覽: `no2_product_planning/no2_product_map/app/payment.md` 的 LEVEL 能力清單
-- triggerCloudBackup 拆解依據: `no99_archive/r1_decision_matrix.md` R1 Round 5 拍板。triggerMultiDeviceSync 已隨 preference 只上傳廢止，跨裝置走匯出匯入由 importData 與 exportData 承載
-- 本檔的規則表與上述三者對齊，任一變更時需同步更新
+- 本檔的規則表與上述兩者對齊，任一變更時需同步更新
 
 ---
 
@@ -24,16 +23,11 @@
     - createCategory
     - createTransaction
     - createTransfer
-  - 禁止動作:
-    - createRecurringTransaction
-    - importData
-    - exportData
-    - manageCurrencyRate
-  - 不在禁止清單，含 LEVEL_0 在內全 LEVEL 允許:
-    - triggerCloudBackup
+  - 禁止動作: 無
+    - 唯一受限是 createTransaction / createTransfer 在帳戶或類別達總數上限時連帶被擋，屬總數限制而非獨立禁止
   - 總數限制:
     - 帳戶總數上限 3 個
-    - 類別總數上限 10 個
+    - 類別總數上限 7 個
 - **LEVEL_1 以上:**
   - 允許動作: 全部
   - 禁止動作: 無
@@ -41,6 +35,7 @@
   - 說明:
     - LEVEL_2 記帳 App 視角下能力與 LEVEL_1 相同
     - 授權判斷採用當前訂閱等級大於等於 LEVEL_1 即允許的形式
+    - LEVEL_1 相對 LEVEL_0 的唯一差異是解除帳戶 / 類別 / 交易的總數上限
 
 ---
 
@@ -53,13 +48,12 @@
     - createCategory
     - createTransaction
     - createTransfer
-    - createRecurringTransaction
-    - triggerCloudBackup
-    - importData
-    - exportData
-    - manageCurrencyRate
 - **性質:**
   - 純本地計算，可讀取當前使用者的帳戶總數與類別總數
+  - 帳戶與類別總數計入該使用者未軟刪除的所有列
+  - 已停用的列仍計入，停用不退還配額
+  - 僅軟刪除的列排除於計數
+  - 選擇器另排除停用列，但不影響配額計數
 - **執行:**
   - **IF** 動作識別碼為 createAccount:
     - **IF** 當前訂閱等級為 LEVEL_0:
@@ -73,40 +67,16 @@
   - **IF** 動作識別碼為 createCategory:
     - **IF** 當前訂閱等級為 LEVEL_0:
       - 讀取當前使用者的類別總數
-      - **IF** 類別總數小於 10:
+      - **IF** 類別總數小於 7:
         - **回傳:** 允許
       - **ELSE:**
         - **回傳:** 禁止
     - **ELSE:**
       - **回傳:** 允許
-  - **IF** 動作識別碼為 manageCurrencyRate:
-    - **IF** 當前訂閱等級為 LEVEL_0:
-      - **回傳:** 禁止
-    - **ELSE:**
-      - **回傳:** 允許
-  - **IF** 動作識別碼為 createRecurringTransaction:
-    - 此動作僅涵蓋新增定期排程的授權，LEVEL_0 禁止新增
-    - 既有定期排程的到期實例由背景自動產生，不經本判斷、不受訂閱等級影響
-    - **IF** 當前訂閱等級為 LEVEL_0:
-      - **回傳:** 禁止
-    - **ELSE:**
-      - **回傳:** 允許
-  - **IF** 動作識別碼為 triggerCloudBackup:
-    - **回傳:** 允許
-  - **IF** 動作識別碼為 importData:
-    - **IF** 當前訂閱等級為 LEVEL_0:
-      - **回傳:** 禁止
-    - **ELSE:**
-      - **回傳:** 允許
-  - **IF** 動作識別碼為 exportData:
-    - **IF** 當前訂閱等級為 LEVEL_0:
-      - **回傳:** 禁止
-    - **ELSE:**
-      - **回傳:** 允許
   - **ELSE:**
     - **IF** 當前訂閱等級為 LEVEL_0:
       - 讀取當前使用者的帳戶總數與類別總數
-      - **IF** 帳戶總數已達 3 或類別總數已達 10:
+      - **IF** 帳戶總數已達 3 或類別總數已達 7:
         - **回傳:** 禁止
       - **ELSE:**
         - **回傳:** 允許

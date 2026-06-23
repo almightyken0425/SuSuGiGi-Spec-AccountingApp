@@ -84,11 +84,7 @@
   - 導航至 CurrencyListScreen
 
 - **點按匯率管理:**
-  - 呼叫 canUserPerformAction，動作識別碼 manageCurrencyRate
-  - **IF** 回傳禁止:
-    - 導航至 PaywallScreen
-  - **ELSE:**
-    - 導航至 CurrencyRateListScreen
+  - 導航至 CurrencyRateListScreen
 
 - **點按語系:**
   - 導航至 LanguageSettingScreen

@@ -9,7 +9,6 @@
 ## 觸發情境
 
 - 嵌入於 TransactionEditorScreen 與 TransferEditorScreen，由所在畫面的定期觸發按鈕展開或收合
-- 定期屬付費功能，授權卡點設於所在畫面的定期觸發按鈕。訂閱等級不允許者點按鈕即導航至 PaywallScreen，不會抵達本設定區；故本設定區僅對可使用定期交易的使用者顯示
 
 ---
 
