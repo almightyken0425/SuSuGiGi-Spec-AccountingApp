@@ -118,11 +118,7 @@
   - 返回上一頁
 
 - **點按定期切換按鈕:**
-  - 呼叫 canUserPerformAction，動作識別碼 createRecurringTransaction
-  - **IF** 回傳禁止:
-    - 導航至 PaywallScreen
-  - **ELSE:**
-    - 切換定期設定區的展開或收合狀態
+  - 切換定期設定區的展開或收合狀態
 
 - **點按轉出金額輸入框:**
   - 轉出金額輸入框聚焦
