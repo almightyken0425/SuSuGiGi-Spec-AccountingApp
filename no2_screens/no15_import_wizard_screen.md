@@ -190,24 +190,41 @@
 
 ## CSV 欄位規格
 
-系統欄位定義，供下載範本、下載說明、欄位對應與驗證使用。
+系統欄位定義，為下載範本、下載說明、欄位對應、驗證與匯出的單一依據。
+欄位名稱、CSV 欄位順序、格式與範例於此定義。
+各環節一律對齊，不另立格式。
+欄位對應步驟的列顯示順序屬該步驟畫面安排，與此處 CSV 欄位順序未必相同。
+
+下列順序即 CSV 欄位順序。
 
 - **IF** 交易模式:
-  - transaction_datetime：日期時間，必填
-  - amount：金額，正數為收入，負數為支出，必填
-  - category：類別名稱，必填
-  - account：帳戶名稱，必填
-  - currency：貨幣代碼，必填
-  - note：備註，可選
+  - transaction_datetime：Date-time, YYYY-MM-DD or YYYY-MM-DD HH:MM:SS，必填
+  - category：Category name，必填
+  - account：Account name，必填
+  - amount：Amount; positive for income, negative for expense，必填
+  - currency：Currency code, e.g. TWD，必填
+  - note：Free-text memo，可選
 - **IF** 轉帳模式:
-  - transfer_datetime：日期時間，必填
-  - from_account：轉出帳戶名稱，必填
-  - from_currency：轉出貨幣代碼，必填
-  - from_amount：轉出金額，必填
-  - to_account：轉入帳戶名稱，必填
-  - to_currency：轉入貨幣代碼，必填
-  - to_amount：轉入金額，可選
-  - note：備註，可選
+  - transfer_datetime：Date-time, YYYY-MM-DD or YYYY-MM-DD HH:MM:SS，必填
+  - from_account：Source account name，必填
+  - from_currency：Source currency code，必填
+  - from_amount：Source amount，必填
+  - to_account：Destination account name，必填
+  - to_currency：Destination currency code，必填
+  - to_amount：Destination amount，可選
+  - note：Free-text memo，可選
+
+### 範例列
+
+下載範本除標頭外附範例列，示意合法格式。
+範例值一律符合上述欄位格式，使範本可直接作為匯入輸入。
+
+- **IF** 交易模式:
+  - 2026-01-21 12:30:00,Food,Cash,-150.00,TWD,Lunch
+  - 2026-01-22 09:00:00,Salary,Bank,50000.00,TWD,January salary
+- **IF** 轉帳模式:
+  - 2026-01-21 14:00:00,Cash,TWD,10000.00,Bank,TWD,10000.00,Deposit
+  - 2026-01-22 10:30:00,Bank,TWD,30000.00,USD account,USD,1000.00,FX exchange
 
 ---
 

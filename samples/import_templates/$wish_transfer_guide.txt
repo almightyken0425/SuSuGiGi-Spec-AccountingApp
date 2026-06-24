@@ -1,0 +1,32 @@
+$wish Import Field Guide
+
+transfer_datetime
+  Required. Date-time, YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+
+from_account
+  Required. Source account name.
+
+from_currency
+  Required. Source currency code.
+
+from_amount
+  Required. Source amount.
+
+to_account
+  Required. Destination account name.
+
+to_currency
+  Required. Destination currency code.
+
+to_amount
+  Optional. Destination amount.
+
+note
+  Optional. Free-text memo.
+
+Notes
+
+- A row is skipped on import if any required field is empty.
+- Timezone: you may add an offset suffix to a datetime, such as +08:00 or -05:00, or Z for UTC.
+  Example: 2026-01-21 14:00:00+08:00
+- When a datetime carries its own offset, the source timezone selected on the import screen does not apply to that row.

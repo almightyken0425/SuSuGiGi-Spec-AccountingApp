@@ -1,0 +1,26 @@
+$wish Import Field Guide
+
+transaction_datetime
+  Required. Date-time, YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+
+category
+  Required. Category name.
+
+account
+  Required. Account name.
+
+amount
+  Required. Amount; positive for income, negative for expense.
+
+currency
+  Required. Currency code, e.g. TWD.
+
+note
+  Optional. Free-text memo.
+
+Notes
+
+- A row is skipped on import if any required field is empty.
+- Timezone: you may add an offset suffix to a datetime, such as +08:00 or -05:00, or Z for UTC.
+  Example: 2026-01-21 12:30:00+08:00
+- When a datetime carries its own offset, the source timezone selected on the import screen does not apply to that row.
