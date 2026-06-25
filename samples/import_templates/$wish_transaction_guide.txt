@@ -1,26 +1,42 @@
 $wish Import Field Guide
 
 transaction_datetime
-  Required. Date-time, YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+  Required
+  Date and time, YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+  Date-only defaults the time to 00:00:00.
 
 category
-  Required. Category name.
+  Required
+  Category name.
+  Income or expense follows the amount sign.
 
 account
-  Required. Account name.
+  Required
+  Account name.
+  Matched together with its currency.
 
 amount
-  Required. Amount; positive for income, negative for expense.
+  Required
+  A positive value is income, a negative value is expense.
+  Use a period for decimals, up to 4 places.
+  No comma, thousands separator, or currency symbol.
 
 currency
-  Required. Currency code, e.g. TWD.
+  Required
+  ISO 4217 code, e.g. TWD, USD, JPY.
+  Case-insensitive.
 
 note
-  Optional. Free-text memo.
+  Optional
+  Free-text memo.
 
 Notes
 
-- A row is skipped on import if any required field is empty.
+- A row is skipped if a required field is empty, or if its date, amount, or currency is not in an accepted format.
+- A positive amount is recorded as income, a negative amount as expense.
+- Accounts are matched by name and currency. The same name with a different currency creates a separate account.
+- If a field value contains a comma, wrap it in double quotes, e.g. "lunch, drinks".
+- Leading and trailing spaces in names are ignored.
 - Timezone: you may add an offset suffix to a datetime, such as +08:00 or -05:00, or Z for UTC.
   Example: 2026-01-21 12:30:00+08:00
 - When a datetime carries its own offset, the source timezone selected on the import screen does not apply to that row.

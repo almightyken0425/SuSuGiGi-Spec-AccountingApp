@@ -65,9 +65,9 @@
 │ 返回            內容比對      前進 │
 ├──────────────────────────────────┤
 │ 帳戶                             │
-│ 玉山活儲                         │
+│ 玉山活儲 (TWD)                   │
 │ [ 沿用                       v ] │
-│ USD 旅費                         │
+│ USD 旅費 (USD)                   │
 │ [ 新建                       v ] │
 │ 支出類別                         │
 │ 飲食                             │
@@ -157,8 +157,9 @@
 - 比對的既有帳戶與類別限當前使用者的活躍紀錄，排除其他使用者與已軟刪項
 - 帳戶段
   - 帳戶 標題
-  - 帳戶比對列，每個 CSV 帳戶名稱一列
-    - CSV 帳戶名稱
+  - 帳戶比對列，每個 CSV 帳戶名稱加幣別一列
+    - CSV 帳戶名稱與幣別
+    - 同名但不同幣別的 CSV 帳戶，各自獨立一列
     - 動作選擇器
       - **IF** 與既有帳戶相符:
         - 沿用、新建、跳過
@@ -198,21 +199,49 @@
 下列順序即 CSV 欄位順序。
 
 - **IF** 交易模式:
-  - transaction_datetime：Date-time, YYYY-MM-DD or YYYY-MM-DD HH:MM:SS，必填
-  - category：Category name，必填
-  - account：Account name，必填
-  - amount：Amount; positive for income, negative for expense，必填
-  - currency：Currency code, e.g. TWD，必填
-  - note：Free-text memo，可選
+  - transaction_datetime，必填
+    - Date and time, YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+    - Date-only defaults the time to 00:00:00.
+  - category，必填
+    - Category name.
+    - Income or expense follows the amount sign.
+  - account，必填
+    - Account name.
+    - Matched together with its currency.
+  - amount，必填
+    - A positive value is income, a negative value is expense.
+    - Use a period for decimals, up to 4 places.
+    - No comma, thousands separator, or currency symbol.
+  - currency，必填
+    - ISO 4217 code, e.g. TWD, USD, JPY.
+    - Case-insensitive.
+  - note，可選
+    - Free-text memo.
 - **IF** 轉帳模式:
-  - transfer_datetime：Date-time, YYYY-MM-DD or YYYY-MM-DD HH:MM:SS，必填
-  - from_account：Source account name，必填
-  - from_currency：Source currency code，必填
-  - from_amount：Source amount，必填
-  - to_account：Destination account name，必填
-  - to_currency：Destination currency code，必填
-  - to_amount：Destination amount，可選
-  - note：Free-text memo，可選
+  - transfer_datetime，必填
+    - Date and time, YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+    - Date-only defaults the time to 00:00:00.
+  - from_account，必填
+    - Source account name.
+    - Matched together with its currency.
+  - from_currency，必填
+    - Source ISO 4217 code, e.g. TWD.
+    - Case-insensitive.
+  - from_amount，必填
+    - Source amount.
+    - Use a period for decimals, up to 4 places.
+    - No comma, thousands separator, or currency symbol.
+  - to_account，必填
+    - Destination account name.
+    - Matched together with its currency.
+  - to_currency，必填
+    - Destination ISO 4217 code.
+    - Case-insensitive.
+  - to_amount，可選
+    - Destination amount.
+    - Needed when the two currencies differ.
+  - note，可選
+    - Free-text memo.
 
 ### 範例列
 
