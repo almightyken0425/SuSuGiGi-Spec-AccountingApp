@@ -11,7 +11,7 @@
 ```text
 +--------------------------------+
 |                                |
-|          SuSuGiGi              |
+|             $wish              |
 |         副標題文字              |
 |                                |
 |  [G  Sign in with Google]      |
