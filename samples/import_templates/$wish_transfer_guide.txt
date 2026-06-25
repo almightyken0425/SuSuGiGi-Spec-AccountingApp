@@ -1,32 +1,52 @@
 $wish Import Field Guide
 
 transfer_datetime
-  Required. Date-time, YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+  Required
+  Date and time, YYYY-MM-DD or YYYY-MM-DD HH:MM:SS.
+  Date-only defaults the time to 00:00:00.
 
 from_account
-  Required. Source account name.
+  Required
+  Source account name.
+  Matched together with its currency.
 
 from_currency
-  Required. Source currency code.
+  Required
+  Source ISO 4217 code, e.g. TWD.
+  Case-insensitive.
 
 from_amount
-  Required. Source amount.
+  Required
+  Source amount.
+  Use a period for decimals, up to 4 places.
+  No comma, thousands separator, or currency symbol.
 
 to_account
-  Required. Destination account name.
+  Required
+  Destination account name.
+  Matched together with its currency.
 
 to_currency
-  Required. Destination currency code.
+  Required
+  Destination ISO 4217 code.
+  Case-insensitive.
 
 to_amount
-  Optional. Destination amount.
+  Optional
+  Destination amount.
+  Needed when the two currencies differ.
 
 note
-  Optional. Free-text memo.
+  Optional
+  Free-text memo.
 
 Notes
 
-- A row is skipped on import if any required field is empty.
+- A row is skipped if a required field is empty, or if its date, amount, or currency is not in an accepted format.
+- Accounts are matched by name and currency. The same name with a different currency creates a separate account.
+- A cross-currency transfer with no to_amount is skipped (the converted amount is needed to record the rate).
+- If a field value contains a comma, wrap it in double quotes, e.g. "lunch, drinks".
+- Leading and trailing spaces in names are ignored.
 - Timezone: you may add an offset suffix to a datetime, such as +08:00 or -05:00, or Z for UTC.
   Example: 2026-01-21 14:00:00+08:00
 - When a datetime carries its own offset, the source timezone selected on the import screen does not apply to that row.
