@@ -54,6 +54,8 @@
   - **IF** 展開:
     - 可搜尋的幣別列表，每項顯示 `alphabeticCode` 與 `name`
     - 輸入搜尋文字即時篩選清單
+  - **IF** 新增模式:
+    - 初始所選為使用者的 Base Currency，與 BaseCurrencySettingScreen 一致
   - **IF** 編輯模式:
     - 不可展開、不可修改
     - 僅顯示當前所選幣別
