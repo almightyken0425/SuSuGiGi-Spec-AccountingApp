@@ -19,6 +19,22 @@
 
 ---
 
+## presentLaunchTransition 啟動轉場呈現
+
+- 啟動期間先呈現 LaunchScreen 蓋住底層、避免空白底色，待條件滿足後依登入結果揭露 LoginScreen 或 HomeScreen
+- **執行:**
+  - **IF** 未登入:
+    - 登入狀態確定後即揭露 LoginScreen
+    - **理由:**
+      - 未登入無使用者偏好可載，無須等待偏好
+  - **IF** 已登入:
+    - 待登入狀態確定且使用者偏好就緒後才揭露 HomeScreen
+    - **理由:**
+      - 僅等登入狀態確定即揭露，會先以預設偏好呈現再跳變為使用者偏好，故須再等偏好就緒
+  - 揭露後移除 LaunchScreen 基礎態
+
+---
+
 ## runCoreBackgroundTasks 執行核心背景任務
 
 - 刷新 Premium 到期狀態，並補產生已到期的定期交易
