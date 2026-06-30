@@ -226,8 +226,8 @@
 ### PremiumCache Local State
 
 - **說明:**
-  - 離線可讀的本地授權快取；付費者離線時依此維持訂閱等級，不誤降為 LEVEL_0
-  - 線上更新成功時寫入，登入態消失或解析為非付費時清除
+  - 離線可讀的本地授權快取，以帳號為範圍；付費者離線時依此維持該帳號訂閱等級，不誤降為 LEVEL_0
+  - 線上更新成功時寫入本機，作為離線回退
   - 為 IAP 解析後的本地授權狀態，與 User 實體 `iapActivePurchasesJson` 的平台原始回傳鏡像職責不同
 - **欄位:**
   - `tier`: Number - Not Null, 快取的訂閱等級，值域對應 LEVEL_0..LEVEL_B，僅涵蓋 IAP 可解析範圍 LEVEL_0、LEVEL_1、LEVEL_2
