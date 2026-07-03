@@ -9,6 +9,9 @@
   - **回傳:** 驗證失敗
 - **IF** amountFrom 小於等於 0 或 amountTo 小於等於 0:
   - **回傳:** 驗證失敗
+- **IF** amountFrom 超出可儲存範圍，或 amountTo 超出可儲存範圍:
+  - **回傳:** 驗證失敗，原因為金額超出範圍
+  - 此上界同時避免過大金額經隱含匯率污染匯率記錄
 - **IF** accountFromId 等於 accountToId:
   - **回傳:** 驗證失敗
 - **ELSE:**
@@ -51,6 +54,9 @@
   - **回傳:** 驗證失敗
 - **IF** amountFrom 小於等於 0 或 amountTo 小於等於 0:
   - **回傳:** 驗證失敗
+- **IF** amountFrom 超出可儲存範圍，或 amountTo 超出可儲存範圍:
+  - **回傳:** 驗證失敗，原因為金額超出範圍
+  - 此上界同時避免過大金額經隱含匯率污染匯率記錄
 - **IF** accountFromId 等於 accountToId:
   - **回傳:** 驗證失敗
 - **ELSE:**

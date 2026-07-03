@@ -31,7 +31,7 @@
 - **欄位:**
   - `id`: String, UUID/GUID - Primary Key
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
-  - `name`: String - Not Null
+  - `name`: String - Not Null, 長度上限 60 字元；寫入時去除前後空白，全為空白視為空
   - `iconId`: Number - Foreign Key to IconDefinitions, Not Null, 須為 tags 含 account 的圖示
   - `currencyCode`: String - Not Null, 帳戶幣別 ISO Alpha Code，例如 TWD
   - `sortOrder`: Number - Not Null, Default 0, 使用者自訂排序位置
@@ -48,7 +48,7 @@
 - **欄位:**
   - `id`: String, UUID/GUID - Primary Key
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
-  - `name`: String - Not Null
+  - `name`: String - Not Null, 長度上限 60 字元；寫入時去除前後空白，全為空白視為空
   - `type`: String - Not Null, expense 或 income，決定此類別為支出或收入
   - `iconId`: Number - Foreign Key to IconDefinitions, Not Null, 須為 tags 含 category 的圖示
   - `sortOrder`: Number - Not Null, Default 0, 使用者自訂排序位置
@@ -68,7 +68,7 @@
   - `categoryId`: String - Foreign Key to Categories, Not Null, Index
   - `amount`: Number - Not Null, 金額，以固定倍率縮放的整數，與幣別無關
   - `date`: Number, Unix Timestamp ms - Not Null, Index, 交易發生日，使用者可編輯，用於報表與排序
-  - `note`: String | Null - Nullable, 用於搜尋
+  - `note`: String | Null - Nullable, 長度上限 200 字元；寫入時去除前後空白，用於搜尋
   - `scheduleId`: String | Null - Foreign Key to Schedules, Nullable
   - `scheduleInstanceDate`: Number | Null, Unix Timestamp ms - Nullable
   - `createdAt`: Number, Unix Timestamp ms - Not Null
@@ -88,7 +88,7 @@
   - `amountTo`: Number - Not Null, 轉入金額，以固定倍率縮放的整數，與幣別無關
   - `impliedRate`: Number | Null - Nullable, 主單位對主單位匯率；同步至 Firestore 時欄位名稱轉為 impliedRateScaled
   - `date`: Number, Unix Timestamp ms - Not Null, Index, 轉帳發生日，用於報表篩選
-  - `note`: String | Null - Nullable, 用於搜尋
+  - `note`: String | Null - Nullable, 長度上限 200 字元；寫入時去除前後空白，用於搜尋
   - `scheduleId`: String | Null - Foreign Key to Schedules, Nullable
   - `scheduleInstanceDate`: Number | Null, Unix Timestamp ms - Nullable
   - `createdAt`: Number, Unix Timestamp ms - Not Null, 資料建立的系統時間
@@ -134,7 +134,7 @@
   - `id`: String, UUID/GUID - Primary Key
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
   - `frequency`: String - Not Null, 例如 DAILY、WEEKLY、MONTHLY、YEARLY
-  - `interval`: Number - Not Null, 頻率倍數，例如每兩週一次時 interval 為 2
+  - `interval`: Number - Not Null, 頻率倍數，例如每兩週一次時 interval 為 2；數值上限 999
   - `startOn`: Number, Unix Timestamp ms - Not Null, 排程開始日期，基於使用者時區的 00:00:00 轉存 UTC
   - `endOn`: Number | Null, Unix Timestamp ms - Nullable, 排程結束日期
   - `isTransfer`: Boolean - Not Null, true 代表轉帳排程，false 代表收支排程
@@ -145,7 +145,7 @@
   - `templateAccountFromId`: String | Null - Nullable, 轉出帳戶 ID
   - `templateAmountTo`: Number | Null - Nullable, 轉入金額
   - `templateAccountToId`: String | Null - Nullable, 轉入帳戶 ID
-  - `templateNote`: String | Null - Nullable
+  - `templateNote`: String | Null - Nullable, 長度上限 200 字元；寫入時去除前後空白
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null
   - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable
@@ -232,6 +232,20 @@
 - **欄位:**
   - `tier`: Number - Not Null, 快取的訂閱等級，值域對應 LEVEL_0..LEVEL_B，僅涵蓋 IAP 可解析範圍 LEVEL_0、LEVEL_1、LEVEL_2
   - `expirationDate`: Number | Null, Unix Timestamp ms - Nullable, 訂閱到期日；Null 代表無期限，到期日早於或等於當下時間視為失效
+
+---
+
+## 金額數值標準
+
+- **儲存標準:**
+  - 所有金額相關欄位以固定倍率縮放為整數存放，型別為 Number，與幣別無關
+  - 涵蓋 Transactions 的 `amount`、Transfers 的 `amountFrom` 與 `amountTo`、Schedules 的 `templateAmount`、`templateAmountFrom` 與 `templateAmountTo`
+  - 最大可存的縮放整數落在系統安全整數上界，約 9.007×10^15
+- **輸入約束:**
+  - 使用者輸入受位數上限約束，確保縮放後不超過系統安全整數上界
+- **正負與零值政策:**
+  - 交易金額不得為 0
+  - 轉帳的轉出金額、轉入金額皆須大於 0
 
 ---
 
