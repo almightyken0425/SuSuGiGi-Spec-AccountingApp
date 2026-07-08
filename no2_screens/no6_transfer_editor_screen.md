@@ -153,8 +153,7 @@
       - 呼叫 createSchedule
     - **IF** 編輯模式:
       - 原一般轉帳轉為排程
-      - 呼叫 deleteTransfer
-      - 呼叫 createSchedule
+      - 呼叫 convertToSchedule
   - **IF** 不屬於任何排程且定期規則為空:
     - **IF** 新增模式:
       - 呼叫 canUserPerformAction，動作識別碼 createTransfer
@@ -165,6 +164,7 @@
     - **IF** 編輯模式:
       - 呼叫 updateTransfer
   - **IF** 操作成功:
+    - 呼叫 showUndo
     - 返回上一頁
   - **IF** 操作失敗:
     - 顯示錯誤提示

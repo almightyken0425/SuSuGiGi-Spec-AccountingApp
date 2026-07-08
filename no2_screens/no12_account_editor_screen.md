@@ -105,12 +105,14 @@
   - **IF** 新增模式:
     - 呼叫 createAccount
     - **IF** 操作成功:
+      - 呼叫 showUndo
       - 返回上一頁
     - **IF** 操作失敗:
       - 顯示錯誤提示
   - **IF** 編輯模式:
     - 呼叫 updateAccount
     - **IF** 操作成功:
+      - 呼叫 showUndo
       - 返回上一頁
     - **IF** 操作失敗:
       - 顯示錯誤提示
