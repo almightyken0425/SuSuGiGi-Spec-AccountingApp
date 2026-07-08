@@ -20,6 +20,7 @@
 +--------------------------------+
 |  Language: 繁體中文 >          |
 |  Time Zone: Asia/Taipei >      |
+|  Week Start: 跟隨語系 >        |
 +--------------------------------+
 |  Allow Data Analytics    [ON]  |
 +--------------------------------+
@@ -55,6 +56,8 @@
     - 顯示當前 App 語言
   - 時區 入口
     - 顯示當前設定的時區
+  - 週起始日 入口
+    - 顯示當前週起始日選項
 - 第四組
   - 分析同意 開關
     - 顯示 analyticsConsent 目前狀態
@@ -85,6 +88,9 @@
 
 - **點按時區:**
   - 導航至 TimeZoneSettingScreen
+
+- **點按週起始日:**
+  - 導航至 WeekStartSettingScreen
 
 - **切換分析同意開關:**
   - 呼叫 setAnalyticsConsent

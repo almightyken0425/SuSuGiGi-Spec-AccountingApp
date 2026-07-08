@@ -12,6 +12,7 @@
   - `timeZone`: String - Not Null, IANA Timezone ID，例如 Asia/Taipei
   - `theme`: String - Not Null, 主題設定，例如 light、dark、system
   - `launchMode`: String - Not Null, Default `home`, 啟動模式，可為 `home`、`expense`、`income`、`transfer`
+  - `weekStart`: String - Not Null, Default `auto`, 週起始日偏好，可為 `auto`、`sunday`、`monday`；`auto` 代表依使用者語系慣例決定
   - `analyticsConsent`: Boolean - Not Null, Default `true`, 分析同意開關，控制記帳資料是否納入分析管線
   - `lastSyncedAt`: Number | Null, Unix Timestamp ms - Nullable, 上次完成交易備份上傳的時間，作為 Delta 篩選基準；Null 代表尚未上傳過，偏好上傳不更新此欄位
   - `createdAt`: Number, Unix Timestamp ms - Not Null
@@ -19,7 +20,7 @@
 
 **與 User Management 的關係**: 本機此表為偏好設定唯一真相；`users/{uid}/preferences` 為單向上傳鏡像，僅供資料分析維度，永不下載套用。
 - 整份 `users/{uid}` 雲端文件含 `provider`、文件根層 `updatedAt` 等頂層欄位的形狀權威屬 User Management module 的 Users 資料模型，本 module 不重複承載定義
-- `language`、`timeZone`、`theme`、`launchMode`、`analyticsConsent` 直接對應上傳
+- `language`、`timeZone`、`theme`、`launchMode`、`weekStart`、`analyticsConsent` 直接對應上傳
 - `baseCurrencyId` 上傳時轉 ISO Code 寫入 `preferences.currency`，單向轉換不反向
 - 偏好設定屬裝置層級設定，不隨帳號跨裝置下載
 - 多裝置各自上傳，接受最後寫入覆寫

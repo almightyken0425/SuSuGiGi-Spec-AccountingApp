@@ -66,6 +66,16 @@
 
 ---
 
+## setWeekStart 設定週起始日
+
+- **輸入:**
+  - 目標週起始日值
+- **執行:**
+  - 更新 `Settings` 表中的 `weekStart` 為目標值
+  - 委派 PreferenceUploadLogic 的 uploadPreferences，帶入 weekStart 欄位為目標值
+
+---
+
 ## setAnalyticsConsent 設定分析同意
 
 - **輸入:**

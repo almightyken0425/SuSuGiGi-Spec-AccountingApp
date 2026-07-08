@@ -38,6 +38,8 @@
       - 預設 theme1
     - 啟動模式:
       - 預設 home
+    - 週起始日:
+      - 預設 auto，代表依使用者語系慣例決定，不做 Locale 推導
 - **建立本機資料:**
   - **執行:**
     - 新增記錄至 Users 表與 Settings 表
@@ -47,6 +49,7 @@
     - `timeZone`: 依時區決定
     - `theme`: theme1
     - `launchMode`: home
+    - `weekStart`: auto
 
 ---
 

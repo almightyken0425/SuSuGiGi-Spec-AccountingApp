@@ -27,6 +27,7 @@
     - language
     - timeZone
     - launchMode
+    - weekStart
     - analyticsConsent
 
 ---
@@ -46,6 +47,7 @@
       - `baseCurrencyId` 上傳為遠端 `currency`，值由數值幣別 ID 轉為 ISO 4217 代碼字串，無法解析則略過該欄位
       - `timeZone` 上傳為遠端 `timezone`，值直送
       - `launchMode` 值正規化，非 `home` / `expense` / `income` / `transfer` 一律改為 `home`
+      - `weekStart` 值正規化，非 `auto` / `sunday` / `monday` 一律改為 `auto`
       - `analyticsConsent` 遷移自舊資料的 Null 視為 `true`，代表已同意
       - `theme`、`language` 欄位名與值皆直送
       - 任一欄位轉換後值為空值或 Null 者，略過不寫入
