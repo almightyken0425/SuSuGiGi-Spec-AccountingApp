@@ -136,7 +136,7 @@
   - `userId`: String, Auth UID - Foreign Key to Users, Not Null, Index, 資料擁有者
   - `frequency`: String - Not Null, 例如 DAILY、WEEKLY、MONTHLY、YEARLY
   - `interval`: Number - Not Null, 頻率倍數，例如每兩週一次時 interval 為 2；數值上限 999
-  - `startOn`: Number, Unix Timestamp ms - Not Null, 排程開始日期，基於使用者時區的 00:00:00 轉存 UTC
+  - `startOn`: Number, Unix Timestamp ms - Not Null, 排程開始時點，含日期與時刻，補產實例的起點與時刻基準
   - `endOn`: Number | Null, Unix Timestamp ms - Nullable, 排程結束日期
   - `isTransfer`: Boolean - Not Null, true 代表轉帳排程，false 代表收支排程
   - `templateAmount`: Number | Null - Nullable, 收支金額
