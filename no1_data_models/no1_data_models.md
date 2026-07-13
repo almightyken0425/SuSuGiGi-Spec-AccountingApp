@@ -106,7 +106,7 @@
   - `currencyFromId`: Number - Foreign Key to Currencies, Not Null
   - `currencyToId`: Number - Foreign Key to Currencies, Not Null
   - `rate`: Number - Not Null, 主單位對主單位匯率
-  - `date`: Number, Unix Timestamp ms - Not Null, Index, 匯率生效日期，儲存該日 00:00:00 UTC
+  - `date`: Number, Unix Timestamp ms - Not Null, Index, 匯率生效時點，含日期與時刻，換算取值的新舊比較基準
   - `createdAt`: Number, Unix Timestamp ms - Not Null
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
   - `deletedOn`: Number | Null, Unix Timestamp ms - Nullable
