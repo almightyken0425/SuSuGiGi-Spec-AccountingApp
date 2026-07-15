@@ -74,14 +74,17 @@
 - **點按時間粒度卡片:**
   - 切換至下一個時間粒度
   - HomeScreen 報表即時更新
+  - 選定值由 persistHomeDisplayState 跨啟動保留
 
 - **點按分組方式卡片:**
   - 切換至下一個分組方式
   - HomeScreen 報表即時更新
+  - 選定值由 persistHomeDisplayState 跨啟動保留
 
 - **點按帳戶卡:**
   - 切換該帳戶選取狀態
   - HomeScreen 報表即時更新
+  - 選取結果由 persistHomeDisplayState 跨啟動保留
   - **IF** 該帳戶為僅剩一個被選取:
     - 不可點按
 
