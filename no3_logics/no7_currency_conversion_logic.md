@@ -49,6 +49,9 @@
 
 - 為新建立的非主要貨幣帳戶種入一筆佔位匯率，供後續換算使用
 - 種入的匯率值固定為 1，僅作佔位
+- 佔位記錄的 `date` 固定為極早的佔位時點，不取建立當下時刻
+- 任何真實匯率記錄的 `date` 皆晚於佔位時點，經 resolveCurrencyRate 選取必然壓過佔位；真實記錄較佔位晚寫入、`date` 較舊時亦同
+- 該幣別對僅有佔位記錄時，佔位照樣被選取，換算結果為 1
 - 真實匯率待後續 createTransfer 連動產生，或由使用者透過 createCurrencyRate 手動修正
 - 匯入不呼叫本操作；匯入僅透過 createTransaction 與 createTransfer 建立資料，跨幣別匯率由 createTransfer 連動產生，無記錄則 resolveCurrencyRate 回傳 1
 - **輸入:**
@@ -60,6 +63,8 @@
       - 新增一筆匯率值為 1 的記錄至 `CurrencyRates` 表
     - **ELSE:**
       - 不重複種入
+  - **欄位:**
+    - date: 極早的佔位時點，不取建立當下時刻
 
 ---
 
