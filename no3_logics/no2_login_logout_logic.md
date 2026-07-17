@@ -5,12 +5,12 @@
 - **執行:**
   - 觸發 Google Sign-In 第三方認證程序，取得 ID Token
   - **IF** Google Sign-In 連線或認證失敗:
-    - 顯示連線異常提示
+    - 顯示登入失敗提示
     - RETURN
   - **ELSE:**
     - 以 ID Token 向 Firebase Auth 進行身份驗證
     - **IF** Firebase Auth 驗證失敗:
-      - 顯示連線異常提示
+      - 顯示登入失敗提示
       - RETURN
     - **ELSE:**
       - 呼叫 handlePostAuth

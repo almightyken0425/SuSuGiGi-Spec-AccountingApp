@@ -40,7 +40,7 @@
   - `iconId`: Number - Foreign Key to IconDefinitions, Not Null, 須為 tags 含 account 的圖示
   - `currencyCode`: String - Not Null, 帳戶幣別 ISO Alpha Code，例如 TWD
   - `sortOrder`: Number - Not Null, Default 0, 使用者自訂排序位置
-  - `scheduleId`: String | Null - Foreign Key to Schedules, Nullable, 標記此筆為定期交易產生
+  - `scheduleId`: String | Null - Nullable, 棄用殘欄；任何路徑不寫入、恆為 Null，帳戶不由排程產生
   - `disabledOn`: Number | Null, Unix Timestamp ms - Nullable, 使用者主動停用此帳戶的時間；Null 代表啟用中
   - `createdAt`: Number, Unix Timestamp ms - Not Null, 資料建立的系統時間
   - `updatedOn`: Number, Unix Timestamp ms - Not Null, 資料最後更新時間，同步依據
