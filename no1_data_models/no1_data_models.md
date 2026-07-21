@@ -212,7 +212,7 @@
 - **說明:**
   - 執行期 Premium 等級狀態；授權真相由伺服器端驗證後的授權記錄承載，離線授權快取另見 PremiumCache
   - 各 LEVEL 在記帳 App 視角下的可用能力白話總覽，見 `no2_product_planning/no2_product_map/app/payment.md` 的 LEVEL 能力清單
-  - 動作識別碼與授權判斷邏輯，見 `no4_product_specs/no2_accounting_app/no3_logics/no17_subscription_gate_logic.md`
+  - 動作識別碼與授權判斷邏輯，見 `no3_product_specs/no2_accounting_app/no3_logics/no17_subscription_gate_logic.md`
 - **欄位:**
   - `currentTier`: Number - Not Null, 當前 Premium 等級，值域對應 LEVEL_0..LEVEL_B，僅涵蓋 IAP 可解析的範圍
     - `LEVEL_0`
