@@ -2,19 +2,19 @@
 
 本 repo 為 SuSuGiGi 產品的 **Module Spec git**，module_id 為 `no2_accounting_app`，承載記帳 App 的行為規格。
 
-## 四層 git 配對
+## 多層 git 配對
 
 - **頂層 Product git：**
     - 位於 `../../`
-    - 管理決策框架的上游四層
+    - 管理決策框架的上游各層
 - **對側 Module Design git：**
-    - 位於 Product git 的 `no3_product_designs/no2_accounting_app/`
+    - 位於 Product git 的 `no4_product_designs/no2_accounting_app/`
     - React HTML design canvas（intro / foundations / components / screens / explorations 五個 tab）
 - **本 Module Spec git：**
     - 即本 repo
-    - 位於 Product git 的 `no4_product_specs/no2_accounting_app/`
+    - 位於 Product git 的 `no3_product_specs/no2_accounting_app/`
 - **對側 Module Impl git：**
-    - 位於 Product git 的 `no6_product_development/no2_accounting_app/`
+    - 位於 Product git 的 `no5_product_development/no2_accounting_app/`
     - React Native CLI 記帳 App
 
 完整路徑與配對表由 `decision_framework_router` skill 的 `products_registry.md` 維護。
@@ -43,7 +43,7 @@ Spec 變動時須檢查對應的 Design 視覺、Impl 實作與上游 Product Ma
 
 ### Design git 對側
 
-- 視覺 token 具體值權威：`no3_product_designs/no2_accounting_app/project/10_foundations/data.jsx`
+- 視覺 token 具體值權威：`no4_product_designs/no2_accounting_app/project/10_foundations/data.jsx`
     - 已 export 群組：`TYPOGRAPHY`、`LIST_TOKENS`、`TX_LIST_TOKENS`、`SEARCH_BAR_TOKENS`、`SPACING`、`RADIUS`、`ICON_SIZE`、`HIT_TARGET`、`PALETTE`、`THEMES`、`GLASS`、`CHART_COLORS`、`ICON_LIBRARY`
 - 視覺定案展示：`project/10_foundations/foundations.jsx` 的 DCSection
 - 元件視覺與互動 sandbox：`project/20_components/`
