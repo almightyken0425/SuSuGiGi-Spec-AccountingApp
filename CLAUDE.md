@@ -69,7 +69,7 @@ Spec 變動時須檢查對應的 Design 視覺、Impl 實作與上游 Product Ma
 
 ### 上游 Product git
 
-- Product Map 對應子目錄：`../../no2_product_planning/no2_product_map/no2_accounting_app/`
+- Product Map 對應子目錄：`../../no2_product_planning/no2_product_map/app/`（入口先讀同目錄 `structure.md`）
 - 需求層：`../../no2_product_planning/no1_requirements/`，牽涉新問題時補條目
 
 ---
@@ -94,4 +94,4 @@ Spec 變動時須檢查對應的 Design 視覺、Impl 實作與上游 Product Ma
 
 - 付費等級使用 `LEVEL_0`、`LEVEL_1`、`LEVEL_2`、`LEVEL_3`、`LEVEL_B` 形式
 - LEVEL 的商業定義由頂層 Product git 的 `no1_product_initiation/no3_business_model.md` 承載
-- LEVEL 在本 module 視角下的能力清單由 Product Map 的 `no2_accounting_app/` 子目錄或既有 `app/payment.md` 承載
+- LEVEL 在本 module 視角下的能力清單由 Product Map 的 `app/payment.md` 承載
